@@ -1,0 +1,32 @@
+.App {
+    z-index: 1;
+
+    background-color: var(--full-black);
+    color: var(--white);
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow-x: hidden;
+
+    position: relative;
+}
+
+.not-found-page {
+    z-index: inherit;
+
+    background-color: var(--full-black);
+    color: var(--third-color);
+
+    width: 100%;
+    height: 100%;
+
+    padding: 10%;
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

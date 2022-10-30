@@ -1,0 +1,21 @@
+:root {
+    --main-color: #b5e7f9;
+    --secondary-color: #576473;
+    --third-color: #d4f3ff;
+    --linear-color: linear-gradient(
+        114deg,
+        rgba(181, 231, 249, 1) 18%,
+        rgba(212, 243, 255, 1) 76%
+    );
+    --full-black: #030102;
+    --full-black-90: #1d1b1c;
+    --black: #262a2c;
+    --black-90: #3c4041;
+    --white: #f4f4f4;
+    --half-portal-bg: url("./img/BlackStalin_short.jpg");
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}

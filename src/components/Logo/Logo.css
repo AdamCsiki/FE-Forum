@@ -1,0 +1,22 @@
+.Logo {
+    z-index: inherit;
+
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.logo-image {
+    z-index: inherit;
+
+    min-width: 50px;
+    min-height: auto;
+    width: 50px;
+    height: auto;
+}

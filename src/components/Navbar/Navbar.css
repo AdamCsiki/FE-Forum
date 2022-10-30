@@ -1,0 +1,12 @@
+.Navbar {
+    z-index: 2;
+
+    background-color: var(--full-black);
+
+    width: 100vw;
+    height: 100vh;
+
+    transform: translateX(-150%);
+
+    position: fixed;
+}

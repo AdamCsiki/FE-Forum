@@ -1,0 +1,60 @@
+.LoginPage {
+    z-index: inherit;
+
+    background-image: url("../../img/BlackStalin.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 4rem 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-game-logo-container {
+    width: 100%;
+    height: fit-content;
+
+    padding: 0.5rem 0 0 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#game-logo-image {
+    width: 50px;
+}
+
+.login-input-container {
+    /* background-color: blue; */
+    height: 30%;
+
+    padding: 15vh 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-input-container > * {
+    margin-bottom: 7.5%;
+}
+
+#login-forgot-password {
+    color: var(--third-color);
+}
+
+#login-button {
+    width: 45%;
+    font-weight: bold;
+    margin-top: 2rem;
+}
