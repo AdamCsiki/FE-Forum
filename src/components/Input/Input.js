@@ -1,15 +1,12 @@
 import "./Input.css";
 
-function Input({ width, height, placeholder }) {
+function Input({ placeholder, style }) {
     return (
         <input
             className="Input"
             type={"text"}
             placeholder={placeholder}
-            style={{
-                width: width ?? "fit-content",
-                height: height ?? "fit-content",
-            }}
+            style={style}
         ></input>
     );
 }

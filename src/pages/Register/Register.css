@@ -1,0 +1,14 @@
+.Register {
+    z-index: inherit;
+
+    width: 100%;
+    height: calc(100% - 60px);
+
+    display: flex;
+
+    position: relative;
+}
+
+.register-header {
+    background-color: white;
+}
