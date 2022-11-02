@@ -11,6 +11,8 @@ import {
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Posts from "./pages/Posts/Posts";
+import UserPost from "./pages/UserPost/UserPost";
 
 function App() {
 <<<<<<< Updated upstream
@@ -26,6 +28,14 @@ function App() {
                     <Route
                         path="/register"
                         element={<Register />}
+                    />
+                    <Route
+                        path="/all"
+                        element={<Posts />}
+                    />
+                    <Route
+                        path="/post"
+                        element={<UserPost />}
                     />
                     <Route
                         path="*"
