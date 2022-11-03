@@ -6,26 +6,10 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 12.5% fit-content fit-content;
+    grid-template-rows: fit-content fit-content;
     grid-template-areas:
-        "postsHeader postsHeader"
         "postsContent postsContent"
         "postsFooter postsFooter";
-}
-
-.posts-header {
-    z-index: inherit;
-
-    background-color: var(--black);
-
-    padding: 15px 10px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    grid-area: postsHeader;
 }
 
 .posts-content {
@@ -59,4 +43,7 @@
     align-items: center;
 
     grid-area: postsFooter;
+}
+
+@media only screen and (min-width: 768px) {
 }

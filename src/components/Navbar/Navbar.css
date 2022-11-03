@@ -2,6 +2,7 @@
     z-index: 2;
 
     background-color: var(--full-black);
+    color: var(--white);
 
     width: 100vw;
     height: 100vh;
@@ -9,4 +10,29 @@
     transform: translateX(-150%);
 
     position: fixed;
+}
+
+@media screen and (min-width: 768px) {
+    .Navbar {
+        background-color: transparent;
+
+        height: fit-content;
+        width: fit-content;
+
+        transform: translateX(0);
+        position: relative;
+    }
+
+    .navbar-list {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .navbar-list-element {
+        margin: 0 5px;
+    }
+
+    .navbar-link {
+        color: var(--white);
+    }
 }

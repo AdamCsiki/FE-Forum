@@ -11,8 +11,8 @@ function PostsHeader() {
                 stroke={"bold"}
             />
             <Input
+                id={"postsheader-input"}
                 placeholder={"Search"}
-                style={{ width: "65%" }}
             />
             <FunnelFill
                 size={40}

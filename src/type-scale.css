@@ -81,3 +81,11 @@ small,
 .nomargin {
     margin: 0;
 }
+
+.noline {
+    text-decoration: none;
+}
+
+.noline:hover {
+    text-decoration: underline;
+}
