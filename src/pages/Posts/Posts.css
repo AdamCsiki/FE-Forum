@@ -1,48 +1,43 @@
 .Posts {
-    z-index: inherit;
+	z-index: inherit;
 
-    width: 100%;
-    height: calc(100% - 60px);
+	height: calc(100% - 60px);
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: fit-content fit-content;
-    grid-template-areas:
-        "postsContent postsContent"
-        "postsFooter postsFooter";
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	flex-grow: 1;
 }
 
 .posts-content {
-    width: 100%;
-    height: fit-content;
+	width: 100%;
+	height: fit-content;
 
-    padding: 15px;
+	padding: 15px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    grid-area: postsContent;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .posts-content > * {
-    margin: 0 0 15px 0;
+	margin: 0 0 15px 0;
 }
 
 .posts-footer {
-    background-color: var(--full-black-90);
+	background-color: var(--full-black-90);
 
-    width: 100%;
+	width: 100%;
 
-    padding: 15px;
+	padding: 15px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    grid-area: postsFooter;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 @media only screen and (min-width: 768px) {

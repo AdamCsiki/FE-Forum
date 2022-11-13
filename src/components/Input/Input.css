@@ -1,26 +1,25 @@
 .Input {
-    background-color: var(--white);
-    color: var(--full-black);
+	background-color: var(--white);
+	color: var(--full-black);
 
-    font-weight: medium;
-    font-size: 16px;
+	font-weight: medium;
+	font-size: 16px;
 
-    width: 100%;
+	width: 100%;
 
-    padding: 0.6rem 1rem;
+	padding: 0.6rem 1rem;
 
-    border-radius: 15px;
+	border-radius: 15px;
 
-    outline: none;
-    border: none;
+	outline: none;
+	border: none;
 }
 
 .Input::placeholder {
-    font-size: 16px;
-    color: var(--black-75);
+	font-size: 16px;
+	color: var(--black-75);
 }
 
 .Input:focus {
-    border: 1px solid var(--main-color);
-    outline: 1px solid var(--main-color);
+	outline: 1px solid var(--main-color);
 }

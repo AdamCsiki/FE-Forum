@@ -1,0 +1,28 @@
+.SearchBar {
+	z-index: inherit;
+
+	background-color: transparent;
+
+	padding: 15px 10px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	gap: 1rem;
+
+	flex-grow: 1;
+}
+
+#searchbar-input {
+	flex-grow: 1;
+	padding: 0.5rem;
+	opacity: 0.3;
+}
+
+@media screen and (min-width: 768px) {
+	.SearchBar {
+		justify-content: space-around;
+	}
+}
