@@ -3,6 +3,7 @@ import "./DropDown.css";
 
 function DropDown({ id, listId, element, list, style, listStyle }) {
 	const containerRef = useRef();
+	const containerListRef = useRef();
 	const [height, setHeight] = useState();
 	const [width, setWidth] = useState();
 	const [x, setX] = useState();
@@ -16,10 +17,21 @@ function DropDown({ id, listId, element, list, style, listStyle }) {
 		setWidth(containerRef.current.clientWidth);
 	};
 
+	// const handleClickedOutside = (event) => {
+	// 	if (
+	// 		(containerRef.current &&
+	// 			!containerRef.current.contains(event.target)) ||
+	// 		(containerListRef.current &&
+	// 			!containerListRef.current.contains(event.target))
+	// 	) {
+	// 		setVisible(false);
+	// 	}
+	// };
+
 	useEffect(() => {
 		getPosition();
-		console.log(x, y, height, width);
 		window.addEventListener("resize", getPosition);
+		// document.addEventListener("mousedown", handleClickedOutside);
 	});
 
 	return (
@@ -39,7 +51,9 @@ function DropDown({ id, listId, element, list, style, listStyle }) {
 					borderRight: visible
 						? "1px solid var(--full-black)"
 						: "none",
-					boxShadow: visible ? "0 1px 1px var(--full-black)" : "none",
+					borderBottom: visible
+						? "1px solid var(--full-black)"
+						: "none",
 					...style,
 				}}
 				ref={containerRef}
@@ -56,10 +70,11 @@ function DropDown({ id, listId, element, list, style, listStyle }) {
 				style={{
 					top: y + height,
 					left: x,
-					width: width + 1,
+					width: width,
 					display: visible ? "flex" : "none",
 					...listStyle,
 				}}
+				ref={containerListRef}
 			>
 				{list}
 			</div>
