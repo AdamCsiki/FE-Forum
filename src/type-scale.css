@@ -20,6 +20,15 @@ body {
 	font-family: "DM Sans", sans-serif;
 }
 
+a {
+	color: var(--white);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 p {
 	margin-bottom: 1rem;
 }
@@ -108,4 +117,16 @@ small,
 
 .right {
 	text-align: right;
+}
+
+.white {
+	color: var(--white);
+}
+
+.black {
+	color: var(--black);
+}
+
+.nowrap {
+	white-space: nowrap;
 }

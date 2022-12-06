@@ -1,62 +1,65 @@
 .Post {
-    background-color: var(--black);
+	background-color: var(--black);
 
-    width: 100%;
-    height: fit-content;
+	width: 100%;
+	height: fit-content;
 
-    border-radius: 5px;
+	border-radius: 5px;
 
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .post-header {
-    background-color: var(--full-black-90);
+	background-color: var(--full-black-90);
 
-    width: 100%;
+	width: 100%;
 
-    padding: 5px 15px;
+	padding: 5px 15px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .post-content {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "postAuthor postReplies";
+	display: grid;
+	grid-template-rows: 1fr;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "postAuthor postReplies";
 }
 
 .post-content > * {
-    padding: 5px 15px;
+	padding: 5px 15px;
 }
 
 .post-title {
-    color: var(--white);
-    text-decoration: none;
+	color: var(--white);
+	text-decoration: none;
 }
 
 .post-title:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .post-author {
-    color: var(--white);
-    text-decoration: none;
+	color: var(--white);
+	text-decoration: none;
 
-    grid-area: postAuthor;
+	grid-area: postAuthor;
 }
 
 .post-author {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .post-replies {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
 
-    grid-area: postReplies;
+	grid-area: postReplies;
+}
+
+@media screen and (min-width: 765px) {
 }

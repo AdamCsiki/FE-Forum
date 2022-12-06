@@ -1,13 +1,25 @@
 .DropDown {
-	z-index: 6;
-
 	background-color: transparent;
+
+	border-radius: 2rem;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+
+	position: relative;
+}
+
+.dropdown-button {
+	z-index: 6;
+	width: fit-content;
 
 	cursor: pointer;
 
-	height: 100%;
-	width: 100%;
+	padding: 0.25rem 0.5rem;
 
+	border-radius: 2rem;
 	border: none;
 
 	display: flex;
@@ -16,16 +28,13 @@
 	align-items: center;
 }
 
-.DropDown:hover {
-	opacity: 0.5;
+.dropdown-button:hover {
+	opacity: 0.75;
+	box-shadow: 0 0 100px var(--white);
 }
 
 .dropdown-list {
 	z-index: 5;
-
-	border-bottom: 1px solid var(--full-black);
-	border-right: 1px solid var(--full-black);
-	border-left: 1px solid var(--full-black);
 
 	border-radius: 0 0 1rem 1rem;
 
@@ -38,9 +47,13 @@
 	justify-content: flex-start;
 	align-items: center;
 
-	position: absolute;
+	top: 100%;
 
-	overflow: auto;
+	position: absolute;
+}
+
+.dropdown-list > * {
+	position: relative;
 }
 
 .dropdown-list > * {
@@ -51,4 +64,8 @@
 .dropdown-list > *:hover {
 	background-color: var(--full-black);
 	/* cursor: pointer; */
+}
+
+.dropdown-list > *:last-child:hover {
+	border-radius: 0 0 1rem 1rem;
 }

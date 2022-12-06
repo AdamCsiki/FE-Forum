@@ -1,71 +1,76 @@
 :root {
-    --main-color: #b5e7f9;
-    --secondary-color: #576473;
-    --third-color: #d4f3ff;
-    --linear-color: linear-gradient(
-        114deg,
-        rgba(181, 231, 249, 1) 18%,
-        rgba(212, 243, 255, 1) 76%
-    );
-    --full-black: #131112;
-    --full-black-90: #1d1b1c;
-    --full-black-75: #424141;
-    --full-black-50: #818081;
-    --full-black-25: #c0bfbf;
-    --full-black-10: #e6e6e6;
-    --black: #262a2c;
-    --black-90: #3c4041;
-    --black-75: #5c6061;
-    --black-50: #939596;
-    --black-25: #c8c9ca;
-    --black-10: #dfdfdf;
-    --white: #f4f4f4;
-    --half-portal-bg: url("./img/BlackStalin_short.jpg");
+	--main-color: #b5e7f9;
+	--secondary-color: #576473;
+	--third-color: #d4f3ff;
+	--linear-color: linear-gradient(
+		114deg,
+		rgba(181, 231, 249, 1) 18%,
+		rgba(212, 243, 255, 1) 76%
+	);
+	--error-color: #c62828;
+	--full-black: #131112;
+	--full-black-90: #1d1b1c;
+	--full-black-75: #424141;
+	--full-black-50: #818081;
+	--full-black-25: #c0bfbf;
+	--full-black-10: #e6e6e6;
+	--black: #262a2c;
+	--black-90: #3c4041;
+	--black-75: #5c6061;
+	--black-50: #939596;
+	--black-25: #c8c9ca;
+	--black-10: #dfdfdf;
+	--white: #f4f4f4;
+	--half-portal-bg: url("./img/BlackStalin_short.jpg");
 }
 
 .col-1 {
-    width: 8.33%;
+	width: 8.33%;
 }
 .col-2 {
-    width: 16.66%;
+	width: 16.66%;
 }
 .col-3 {
-    width: 25%;
+	width: 25%;
 }
 .col-4 {
-    width: 33.33%;
+	width: 33.33%;
 }
 .col-5 {
-    width: 41.66%;
+	width: 41.66%;
 }
 .col-6 {
-    width: 50%;
+	width: 50%;
 }
 .col-7 {
-    width: 58.33%;
+	width: 58.33%;
 }
 .col-8 {
-    width: 66.66%;
+	width: 66.66%;
 }
 .col-9 {
-    width: 75%;
+	width: 75%;
 }
 .col-10 {
-    width: 83.33%;
+	width: 83.33%;
 }
 .col-11 {
-    width: 91.66%;
+	width: 91.66%;
 }
 .col-12 {
-    width: 100%;
+	width: 100%;
 }
 
 [class*="col-"] {
-    float: left;
+	float: left;
 }
 
 .row::after {
-    content: "";
-    clear: both;
-    display: table;
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.error-message {
+	color: var(--error-color);
 }

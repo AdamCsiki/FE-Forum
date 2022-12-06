@@ -1,58 +1,55 @@
 import { useEffect, useRef, useState } from "react";
 import "./DropDown.css";
 
-function DropDown({ id, listId, element, list, style, listStyle }) {
+function DropDown({
+	id,
+	listId,
+	element,
+	list,
+	style,
+	listStyle,
+	backgroundColor,
+	activeBackgroundColor,
+}) {
 	const containerRef = useRef();
 	const containerListRef = useRef();
 	const [height, setHeight] = useState();
 	const [width, setWidth] = useState();
-	const [x, setX] = useState();
-	const [y, setY] = useState();
 	const [visible, setVisible] = useState(false);
 
 	const getPosition = () => {
-		setX(containerRef.current.offsetLeft);
-		setY(containerRef.current.offsetTop);
-		setHeight(containerRef.current.clientHeight);
-		setWidth(containerRef.current.clientWidth);
+		setHeight(containerRef.current.getBoundingClientRect().height);
+		setWidth(containerRef.current.getBoundingClientRect().width);
 	};
 
-	// const handleClickedOutside = (event) => {
-	// 	if (
-	// 		(containerRef.current &&
-	// 			!containerRef.current.contains(event.target)) ||
-	// 		(containerListRef.current &&
-	// 			!containerListRef.current.contains(event.target))
-	// 	) {
-	// 		setVisible(false);
-	// 	}
-	// };
+	const handleClickedOutside = (event) => {
+		if (
+			containerRef.current &&
+			!containerRef.current.contains(event.target) &&
+			containerListRef.current &&
+			!containerListRef.current.contains(event.target)
+		) {
+			setVisible(false);
+		}
+	};
 
 	useEffect(() => {
-		getPosition();
 		window.addEventListener("resize", getPosition);
-		// document.addEventListener("mousedown", handleClickedOutside);
-	});
+		document.addEventListener("mousedown", handleClickedOutside);
+	}, []);
 
 	return (
-		<>
+		<div className="DropDown">
 			<button
 				id={id}
-				className="DropDown"
+				className="dropdown-button"
 				style={{
 					backgroundColor: visible
-						? "var(--full-black-90)"
-						: "transparent",
+						? activeBackgroundColor ?? "var(--full-black-90)"
+						: backgroundColor ?? "transparent",
 					borderRadius: visible ? "1rem 1rem 0 0" : 0,
-					borderTop: visible ? "1px solid var(--full-black)" : "none",
-					borderLeft: visible
-						? "1px solid var(--full-black)"
-						: "none",
-					borderRight: visible
-						? "1px solid var(--full-black)"
-						: "none",
-					borderBottom: visible
-						? "1px solid var(--full-black)"
+					boxShadow: visible
+						? "var(--full-black) 0px 1px 4px"
 						: "none",
 					...style,
 				}}
@@ -63,22 +60,25 @@ function DropDown({ id, listId, element, list, style, listStyle }) {
 			>
 				{element}
 			</button>
-
 			<div
 				id={listId}
 				className="dropdown-list"
 				style={{
-					top: y + height,
-					left: x,
+					backgroundColor: visible
+						? activeBackgroundColor ?? "var(--full-black-90)"
+						: "transparent",
+					boxShadow:
+						"var(--full-black) 0px 1px 4px, var(--black) 0px 0px 0px 3px",
+
 					width: width,
 					display: visible ? "flex" : "none",
 					...listStyle,
 				}}
 				ref={containerListRef}
 			>
-				{list}
+				{list ?? "Please add items"}
 			</div>
-		</>
+		</div>
 	);
 }
 
