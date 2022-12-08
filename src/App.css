@@ -9,7 +9,31 @@
 
     overflow-x: hidden;
 
+<<<<<<< Updated upstream
     position: relative;
+=======
+	position: relative;
+}
+
+.app-main {
+	z-index: 1;
+
+	width: 100%;
+	height: calc(100% - 60px);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	flex-grow: 1;
+
+	gap: 1rem;
+>>>>>>> Stashed changes
+}
+
+.app-main > * {
+	z-index: inherit;
 }
 
 .not-found-page {

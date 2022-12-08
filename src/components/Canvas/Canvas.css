@@ -1,0 +1,38 @@
+.Canvas {
+	z-index: 0;
+
+	width: 100%;
+	height: 100%;
+
+	overflow: hidden;
+
+	position: absolute;
+}
+
+.Canvas > * {
+	z-index: 0;
+}
+
+@keyframes rotatecardfallleft {
+	from {
+		transform: translateY(0) rotateY(0deg);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateY(200vh) rotateY(180deg);
+		opacity: 0;
+	}
+}
+
+@keyframes rotatecardfallright {
+	from {
+		transform: translateY(0) rotateY(0deg);
+		opacity: 1;
+	}
+
+	to {
+		transform: translateY(250vh) rotateY(-180deg);
+		opacity: 0;
+	}
+}

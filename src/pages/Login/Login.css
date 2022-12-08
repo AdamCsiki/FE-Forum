@@ -1,0 +1,184 @@
+/* Mobile */
+
+.LoginPage {
+	z-index: 0;
+
+	width: 100%;
+	height: 100%;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 10% 25% 40% 25%;
+	grid-template-areas:
+		"loginHeader loginHeader"
+		"loginTitle loginTitle"
+		"loginInput loginInput"
+		"loginButton loginButton";
+
+	position: relative;
+}
+
+.login-background {
+	z-index: -1;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	position: absolute;
+}
+
+.login-background-image {
+	z-index: -1;
+
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+
+	position: relative;
+}
+
+.login-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0 15px;
+
+	grid-area: loginHeader;
+}
+
+#game-logo-image {
+	width: 5em;
+	margin: 2% 0;
+	grid-area: loginLogo;
+}
+
+#login-register-button {
+	grid-area: loginRegister;
+}
+
+.login-title-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	grid-area: loginTitle;
+}
+
+.login-input-container {
+	/* background-color: blue; */
+	height: 100%;
+	width: 100%;
+
+	padding: 0 20%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+
+	grid-area: loginInput;
+}
+
+#login-forgot-password {
+	color: var(--third-color);
+}
+
+.login-button-container {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	gap: 20%;
+
+	grid-area: loginButton;
+}
+
+#login-button {
+	font-weight: bold;
+	width: 125px;
+	height: fit-content;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+	.LoginPage {
+		height: 100%;
+		background-image: none;
+
+		grid-template-columns: 65% 30%;
+		grid-template-rows: 32.5% 35% 32.5%;
+		grid-template-areas:
+			"loginHeader loginTitle"
+			"loginHeader loginInput"
+			"loginHeader loginButton";
+	}
+
+	.login-header {
+		/* background-image: url(../../img/StalinTheBlack.png); */
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+
+		width: 100%;
+		height: 100%;
+
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 15% 85%;
+		grid-template-areas:
+			"loginRegister"
+			"loginLogo";
+	}
+
+	.login-register-button {
+		height: 100%;
+		width: 100%;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+
+		grid-area: loginRegister;
+	}
+
+	.logo-image-container {
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#game-logo-image {
+		height: 18%;
+		width: auto;
+
+		transform: translate(0, -50%);
+	}
+
+	.login-title-container {
+		align-items: flex-end;
+	}
+
+	.login-input-container {
+		padding: 0 12.5%;
+
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.login-button-container {
+		padding: 10% 0;
+	}
+}

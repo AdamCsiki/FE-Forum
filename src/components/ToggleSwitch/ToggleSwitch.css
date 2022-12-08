@@ -1,0 +1,62 @@
+.ToggleSwitch {
+	z-index: 5;
+	width: 50px;
+	height: 25px;
+
+	display: inline-block;
+
+	border-radius: 1rem;
+
+	overflow: hidden;
+
+	position: relative;
+}
+
+.toggleswitch-input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.toggleswitch-input:checked + .toggleswitch-slider:before {
+	-webkit-transform: translateX(100%);
+	-ms-transform: translateX(100%);
+	transform: translateX(100%);
+}
+
+.toggleswitch-input:checked + .toggleswitch-slider {
+	background-color: var(--main-color);
+}
+
+.toggleswitch-slider {
+	background-color: var(--white);
+
+	cursor: pointer;
+
+	position: absolute;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	transition: 0.4s;
+}
+
+.toggleswitch-slider:before {
+	content: "";
+
+	background-color: black;
+
+	height: 20px;
+	width: 20px;
+
+	border-radius: 2rem;
+
+	top: 2.5px;
+	left: 2.5px;
+	bottom: 0;
+	right: 0;
+
+	position: absolute;
+}
