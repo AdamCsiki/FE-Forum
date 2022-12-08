@@ -1,18 +1,28 @@
 import "./Forum.css";
 import Post from "../../components/Post/Post";
-import { useParams } from "react-router-dom";
 
 function Forum() {
-	let { searchquery } = useParams();
+	document.title = "All Posts";
 	let postList = [];
 
 	for (let i = 0; i < 99; i++) {
-		postList.push(<Post key={i} />);
+		postList.push(<Post />);
 	}
 
 	return (
 		<div className="Forum">
-			<div className="Posts">{postList}</div>
+			<div className="Posts">
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+				<Post />
+			</div>
 		</div>
 	);
 }

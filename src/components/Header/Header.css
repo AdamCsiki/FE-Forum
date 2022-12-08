@@ -1,70 +1,38 @@
 .Header {
-    z-index: 3;
+	z-index: 3;
 
-    background-color: var(--black);
-    box-shadow: 1px 1px 0.5rem rgb(0, 0, 0, 0.5);
+	background-color: var(--black);
+	box-shadow: 1px 1px 0.5rem rgb(0, 0, 0, 0.5);
 
-    min-width: 100%;
-    min-height: 60px;
+	min-width: 100%;
+	min-height: 60px;
 
-    width: 100%;
-    height: 60px;
+	width: 100%;
+	height: 60px;
 
-    padding: 0 5px;
+	padding: 0 1rem;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 
-    position: sticky;
+	gap: 1%;
+
+	position: sticky;
 }
 
-.header-button-container {
-    width: 30%;
-    height: fit-content;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-<<<<<<< Updated upstream
-.header-button {
-    background-color: transparent;
-    border: none;
-    margin: 0 0 0 0.5rem;
-}
-=======
 .header-navbar {
 	width: 100%;
-
-	display: none;
+	display: flex;
 	justify-content: flex-end;
 	align-items: center;
->>>>>>> Stashed changes
 
-.header-navbar-button,
-.header-profile-button {
-    color: var(--third-color);
-    cursor: pointer;
+	gap: 2.5%;
 }
 
-.header-button:active > * {
-    color: var(--secondary-color);
-}
-
-<<<<<<< Updated upstream
-.header-button:hover > * {
-    transform: scale(110%);
-=======
-#header-switch {
+#header-profile-container {
 }
 
 @media screen and (min-width: 765px) {
-	.header-navbar {
-		display: flex;
-	}
->>>>>>> Stashed changes
 }

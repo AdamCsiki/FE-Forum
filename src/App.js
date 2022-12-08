@@ -2,72 +2,29 @@ import "./_reset.css";
 import "./Root.css";
 import "./type-scale.css";
 import "./App.css";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
-} from "react-router-dom";
+import "./components/SearchBar/SearchBar.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthProvider.tsx";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Posts from "./pages/Posts/Posts";
+import Forum from "./pages/Forum/Forum";
 import UserPost from "./pages/UserPost/UserPost";
+import Canvas from "./components/Canvas/Canvas";
+import { useRef } from "react";
 
 function App() {
-<<<<<<< Updated upstream
-    return (
-        <div className="App">
-            <Router>
-                <Header />
-                <Routes>
-                    <Route
-                        path="/login"
-                        element={<Login />}
-                    />
-                    <Route
-                        path="/register"
-                        element={<Register />}
-                    />
-                    <Route
-                        path="/all"
-                        element={<Posts />}
-                    />
-                    <Route
-                        path="/post"
-                        element={<UserPost />}
-                    />
-                    <Route
-                        path="*"
-                        element={
-                            <>
-                                <div className="not-found-page">
-                                    <h2>404 Not found</h2>
-                                </div>
-                                <Navigate to={"/login"} />
-                            </>
-                        }
-                    />
-                </Routes>
-            </Router>
-        </div>
-    );
-=======
-	const cards = useRef(true);
+	const cards = useRef(false);
 
 	return (
 		<AuthProvider>
 			<div className="App">
-				{cards && <Canvas active={cards} />}
+				<Canvas active={cards} />
 				<Router>
 					<Header switchRef={cards} />
 
 					<div className="app-main">
 						<Routes>
-							<Route
-								path="/"
-								element={<Forum />}
-							/>
 							<Route
 								path="/login"
 								element={<Login />}
@@ -76,17 +33,13 @@ function App() {
 								path="/register"
 								element={<Register />}
 							/>
-							<Route
-								path="/author"
-								element={<div>Author page wip</div>}
-							/>
-							<Route path="/forum">
+							<Route path="/">
 								<Route
 									index
 									element={<Forum />}
 								/>
 								<Route
-									path="search=:searchquery"
+									path=":gametitle"
 									element={<Forum />}
 								>
 									<Route
@@ -119,7 +72,6 @@ function App() {
 			</div>
 		</AuthProvider>
 	);
->>>>>>> Stashed changes
 }
 
 export default App;

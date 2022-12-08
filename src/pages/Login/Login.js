@@ -6,7 +6,6 @@ import Button from "../../components/Button/Button";
 import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthProvider.tsx";
 import Canvas from "../../components/Canvas/Canvas";
-import backgroundImage from "../../img/BlackStalin_short.jpg";
 import axios from "axios";
 
 function LoginPage() {
@@ -61,13 +60,6 @@ function LoginPage() {
 				e.preventDefault();
 			}}
 		>
-			<div className="login-background">
-				<img
-					className="login-background-image"
-					src={backgroundImage}
-				/>
-			</div>
-
 			<div className="login-header">
 				<div className="logo-image-container">
 					<img

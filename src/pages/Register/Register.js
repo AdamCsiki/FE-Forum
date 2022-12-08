@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import "./Register.css";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
@@ -11,6 +9,7 @@ function Register() {
 	document.title = "Register";
 
 	const [formData, setFormData] = useState({});
+	const [step, setStep] = useState(0);
 	const navigate = useNavigate();
 	const [error, setError] = useState("");
 
@@ -53,41 +52,48 @@ function Register() {
 				e.preventDefault();
 			}}
 		>
-			<h5 className="nomargin medium">Username</h5>
-			<Input placeholder={"Username"} />
-			<h5 className="nomargin medium">Age of birth</h5>
-			<div className="register-input-age-container">
-				<Input
-					placeholder={"Day"}
-					style={{ width: "30%" }}
-					type={"number"}
-					min={1}
-					max={32}
-				/>
-				<Input
-					placeholder={"Month"}
-					style={{ width: "30%" }}
-					type={"number"}
-					min={1}
-					max={12}
-				/>
-				<Input
-					placeholder={"Year"}
-					style={{ width: "30%" }}
-					type={"number"}
-					min={1900}
-					max={2022}
-					pattern={"\b([1-2][0-9][0-9][0-9])\b"}
-				/>
+			<div className="register-input-container">
+				<h5 className="nomargin medium">Username</h5>
+				<Input placeholder={"Username"} />
+				<h5 className="nomargin medium">Age of birth</h5>
+				<div className="register-input-age-container">
+					<Input
+						placeholder={"Day"}
+						style={{ width: "30%" }}
+						type={"number"}
+						min={1}
+						max={32}
+					/>
+					<Input
+						placeholder={"Month"}
+						style={{ width: "30%" }}
+						type={"number"}
+						min={1}
+						max={12}
+					/>
+					<Input
+						placeholder={"Year"}
+						style={{ width: "30%" }}
+						type={"number"}
+						min={1900}
+						max={2022}
+						pattern={"\b([1-2][0-9][0-9][0-9])\b"}
+					/>
+				</div>
 			</div>
-			<h5 className="nomargin medium">Password</h5>
-			<Input placeholder={"Password"} />
-			<h5 className="nomargin medium">Confirm Password</h5>
-			<Input placeholder={"Confirm Password"} />
+			<div className="register-input-container">
+				<h5 className="nomargin medium">Password</h5>
+				<Input placeholder={"Password"} />
+				<h5 className="nomargin medium">Confirm Password</h5>
+				<Input placeholder={"Confirm Password"} />
+			</div>
 			<div className="register-button-container">
 				<Button
 					style={{ width: "40%" }}
 					type={"button"}
+					onClick={() => {
+						setStep(0);
+					}}
 				>
 					<h6 className="nomargin bold">Back</h6>
 				</Button>
@@ -106,4 +112,3 @@ function Register() {
 }
 
 export default Register;
->>>>>>> Stashed changes

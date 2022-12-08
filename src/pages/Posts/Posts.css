@@ -1,0 +1,44 @@
+.Posts {
+	z-index: inherit;
+
+	height: calc(100% - 60px);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	flex-grow: 1;
+}
+
+.posts-content {
+	width: 100%;
+	height: fit-content;
+
+	padding: 15px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.posts-content > * {
+	margin: 0 0 15px 0;
+}
+
+.posts-footer {
+	background-color: var(--full-black-90);
+
+	width: 100%;
+
+	padding: 15px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+}

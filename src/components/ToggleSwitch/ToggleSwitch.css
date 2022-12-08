@@ -1,7 +1,7 @@
 .ToggleSwitch {
 	z-index: 5;
-	width: 50px;
-	height: 25px;
+	width: 60px;
+	height: 30px;
 
 	display: inline-block;
 
@@ -19,9 +19,9 @@
 }
 
 .toggleswitch-input:checked + .toggleswitch-slider:before {
-	-webkit-transform: translateX(100%);
-	-ms-transform: translateX(100%);
-	transform: translateX(100%);
+	-webkit-transform: translateX(22.5px);
+	-ms-transform: translateX(22.5px);
+	transform: translateX(22.5px);
 }
 
 .toggleswitch-input:checked + .toggleswitch-slider {
@@ -48,8 +48,8 @@
 
 	background-color: black;
 
-	height: 20px;
-	width: 20px;
+	height: 25px;
+	width: 25px;
 
 	border-radius: 2rem;
 

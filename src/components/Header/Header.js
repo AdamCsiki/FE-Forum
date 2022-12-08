@@ -1,59 +1,29 @@
 import "./Header.css";
-import Navbar from "../Navbar/Navbar";
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import { PersonCircle, List } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
+import DropDown from "../DropDown/DropDown";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header() {
-    const [profileClicked, setProfileClicked] = useState(false);
-    const [navbarClicked, setNavbarClicked] = useState(false);
+function Header({ switchRef }) {
+	const [title, setTitle] = useState("Home");
+	const [user, setUser] = useState({ username: "Jane Doe" });
 
-    useEffect(() => {
-        if (navbarClicked) {
-        }
-    }, [navbarClicked]);
+	useEffect(() => {
+		setTitle(document.getElementsByTagName("title")[0].innerHTML);
+	}, [document.getElementsByTagName("title")[0].innerHTML]);
 
-<<<<<<< Updated upstream
-    return (
-        <>
-            <div className="Header">
-                <Link to={{ pathname: "/" }}>
-                    <Logo />
-                </Link>
-                <Navbar translateX={"0"} />
-                <div className="header-button-container">
-                    <button className="header-button">
-                        <PersonCircle
-                            onClick={() => {
-                                setProfileClicked(!profileClicked);
-                                setNavbarClicked(false);
-                            }}
-                            className="header-profile-button"
-                            size={30}
-                        />
-                    </button>
-                    <button className="header-button">
-                        <List
-                            onClick={() => {
-                                setNavbarClicked(!navbarClicked);
-                                setProfileClicked(false);
-                            }}
-                            className="header-navbar-button"
-                            size={40}
-                        />
-                    </button>
-                </div>
-            </div>
-        </>
-    );
-=======
 	return (
 		<div className="Header">
 			<Link to={{ pathname: "/" }}>
 				<Logo />
 			</Link>
-
+			<ToggleSwitch
+				onClick={() => {
+					switchRef.current = !switchRef.current;
+				}}
+			/>
 			<div className="header-navbar">
 				<Link
 					to={{ pathname: "home" }}
@@ -67,65 +37,49 @@ function Header() {
 				>
 					Forum
 				</Link>
-			</div>
-			<DropDown
-				id={"header-profile-container"}
-				element={
-					<div
-						style={{
-							width: "fit-content",
-							display: "flex",
-							justifyContent: "flex-end",
-							alignItems: "center",
-							gap: ".5rem",
-						}}
-					>
-						<h6 className="nomargin white nowrap">
-							{user.username}
-						</h6>
-						<PersonCircle
-							className="white"
-							size={40}
-							onResize={() => null}
-						/>
-					</div>
-				}
-				list={
-					<>
+
+				<DropDown
+					id={"header-profile-container"}
+					element={
 						<div
 							style={{
+								width: "fit-content",
 								display: "flex",
-								flexDirection: "row",
-								justifyContent: "flex-start",
+								justifyContent: "flex-end",
 								alignItems: "center",
+								gap: ".5rem",
 							}}
 						>
-							<ToggleSwitch
-								id="header-switch"
-								onClick={() => {
-									switchRef.current = !switchRef.current;
-									console.log(switchRef);
-								}}
+							<h6 className="nomargin white nowrap">
+								{user.username}
+							</h6>
+							<PersonCircle
+								className="white"
+								size={40}
+								onResize={() => null}
 							/>
 						</div>
-						<Link
-							className="white"
-							to={{ pathname: "/login" }}
-						>
-							Login
-						</Link>
-						<Link
-							className="white"
-							to={{ pathname: "/register" }}
-						>
-							Register
-						</Link>
-					</>
-				}
-			/>
+					}
+					list={
+						<>
+							<Link
+								className="white"
+								to={{ pathname: "/login" }}
+							>
+								Login
+							</Link>
+							<Link
+								className="white"
+								to={{ pathname: "/register" }}
+							>
+								Register
+							</Link>
+						</>
+					}
+				/>
+			</div>
 		</div>
 	);
->>>>>>> Stashed changes
 }
 
 export default Header;

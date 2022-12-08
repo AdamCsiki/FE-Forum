@@ -1,11 +1,8 @@
 import "./ToggleSwitch.css";
 
-function ToggleSwitch({ id, onClick }) {
+function ToggleSwitch({ onClick }) {
 	return (
-		<label
-			id={id}
-			className="ToggleSwitch"
-		>
+		<label className="ToggleSwitch">
 			<input
 				className="toggleswitch-input"
 				type="checkbox"
