@@ -8,9 +8,11 @@ import {
     Route,
     Navigate,
 } from "react-router-dom";
-import library from "./misc/Icons"; // eslint-disable-line
 import Header from "./components/Header/Header";
-import LoginPage from "./pages/LoginPage/LoginPage";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
+import Posts from "./pages/Posts/Posts";
+import UserPost from "./pages/UserPost/UserPost";
 
 function App() {
 <<<<<<< Updated upstream
@@ -20,8 +22,20 @@ function App() {
                 <Header />
                 <Routes>
                     <Route
-                        path="/Login"
-                        element={<LoginPage />}
+                        path="/login"
+                        element={<Login />}
+                    />
+                    <Route
+                        path="/register"
+                        element={<Register />}
+                    />
+                    <Route
+                        path="/all"
+                        element={<Posts />}
+                    />
+                    <Route
+                        path="/post"
+                        element={<UserPost />}
                     />
                     <Route
                         path="*"

@@ -1,0 +1,30 @@
+.RotatingCard {
+	width: 322px;
+	height: 468px;
+
+	transform-style: preserve-3d;
+}
+
+.the-front,
+.the-back {
+	width: fit-content;
+	height: fit-content;
+
+	backface-visibility: hidden;
+
+	overflow: hidden;
+
+	position: absolute;
+}
+
+.the-back {
+	transform: rotateY(180deg);
+}
+
+.the-front > *,
+.the-back > * {
+	width: 100%;
+	height: 100%;
+
+	object-fit: contain;
+}

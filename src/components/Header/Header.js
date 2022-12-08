@@ -21,6 +21,7 @@ function Header() {
                 <Link to={{ pathname: "/" }}>
                     <Logo />
                 </Link>
+                <Navbar translateX={"0"} />
                 <div className="header-button-container">
                     <button className="header-button">
                         <PersonCircle
@@ -44,7 +45,6 @@ function Header() {
                     </button>
                 </div>
             </div>
-            <Navbar translateX={"0"} />
         </>
     );
 =======

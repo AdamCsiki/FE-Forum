@@ -1,0 +1,76 @@
+.UserPost {
+    width: 100%;
+    height: 100%;
+
+    padding: 15px;
+}
+
+.userpost-main {
+    background-color: var(--black);
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 85% 15%;
+    grid-template-rows: 100%;
+    grid-template-areas: "userPostMainContent userPostMainVotes";
+}
+
+.userpost-main-content {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: fit-content fit-content fit-content;
+    grid-template-areas:
+        "userPostMainUser"
+        "userPostMainText"
+        "userPostMainInput";
+
+    grid-area: userPostMainContent;
+}
+
+.userpost-main-user {
+    width: 100%;
+
+    box-shadow: inset 50px 50px 10rem rgb(0, 0, 0, 0.1);
+
+    padding: 15px;
+
+    grid-area: userPostMainUser;
+}
+
+.userpost-main-text {
+    width: 100%;
+
+    padding: 15px;
+
+    inline-size: 100%;
+    overflow-wrap: break-word;
+
+    grid-area: userPostMainText;
+}
+
+.userpost-main-input {
+    padding: 15px;
+
+    box-shadow: inset 50px 50px 10rem rgb(0, 0, 0, 0.1);
+
+    grid-area: userPostMainInput;
+}
+
+.userpost-main-votes {
+    background-color: var(--full-black-90);
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    grid-area: userPostMainVotes;
+}

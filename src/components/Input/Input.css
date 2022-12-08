@@ -1,18 +1,25 @@
 .Input {
-    background-color: var(--white);
-    color: var(--full-black);
+	background-color: var(--white);
+	color: var(--full-black);
 
-    font-weight: 500;
+	font-weight: medium;
+	font-size: 16px;
 
-    padding: 0.5rem;
+	width: 100%;
 
-    border-radius: 10px;
+	padding: 0.6rem 1rem;
 
-    outline: none;
-    border: none;
+	border-radius: 15px;
+
+	outline: none;
+	border: none;
+}
+
+.Input::placeholder {
+	font-size: 16px;
+	color: var(--black-75);
 }
 
 .Input:focus {
-    border: 1px solid var(--main-color);
-    outline: 1px solid var(--main-color);
+	outline: 1px solid var(--main-color);
 }

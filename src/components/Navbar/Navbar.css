@@ -1,12 +1,38 @@
 .Navbar {
-    z-index: 2;
+	z-index: 2;
 
-    background-color: var(--full-black);
+	background-color: var(--black);
+	color: var(--white);
 
-    width: 100vw;
-    height: 100vh;
+	border-bottom-right-radius: 1rem;
+	border-top-right-radius: 1rem;
 
-    transform: translateX(-150%);
+	width: 100vw;
+	height: 100%;
 
-    position: fixed;
+	display: flex;
+	flex-direction: column;
+
+	position: absolute;
+
+	transition: 0.75s;
+}
+
+.navbar-list {
+	padding: 1rem 5rem;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: 1rem;
+}
+
+.navbar-link {
+	color: var(--white);
+}
+
+@media screen and (min-width: 768px) {
+	.Navbar {
+		width: fit-content;
+	}
 }
