@@ -6,6 +6,8 @@ function DropDown({
 	listId,
 	element,
 	list,
+	onClick,
+	active,
 	style,
 	listStyle,
 	backgroundColor,
@@ -13,12 +15,10 @@ function DropDown({
 }) {
 	const containerRef = useRef();
 	const containerListRef = useRef();
-	const [height, setHeight] = useState();
-	const [width, setWidth] = useState();
+	const [width, setWidth] = useState(0);
 	const [visible, setVisible] = useState(false);
 
 	const getPosition = () => {
-		setHeight(containerRef.current.getBoundingClientRect().height);
 		setWidth(containerRef.current.getBoundingClientRect().width);
 	};
 
@@ -47,7 +47,11 @@ function DropDown({
 					backgroundColor: visible
 						? activeBackgroundColor ?? "var(--full-black-90)"
 						: backgroundColor ?? "transparent",
-					borderRadius: visible ? "1rem 1rem 0 0" : 0,
+					borderRadius: visible
+						? active
+							? "1rem 1rem 0 0"
+							: "1rem"
+						: 0,
 					boxShadow: visible
 						? "var(--full-black) 0px 1px 4px"
 						: "none",
@@ -56,28 +60,29 @@ function DropDown({
 				ref={containerRef}
 				onClick={() => {
 					setVisible(!visible);
+					onClick();
 				}}
 			>
 				{element}
 			</button>
-			<div
-				id={listId}
-				className="dropdown-list"
-				style={{
-					backgroundColor: visible
-						? activeBackgroundColor ?? "var(--full-black-90)"
-						: "transparent",
-					boxShadow:
-						"var(--full-black) 0px 1px 4px, var(--black) 0px 0px 0px 3px",
+			{active && (
+				<div
+					id={listId}
+					className="dropdown-list"
+					style={{
+						backgroundColor: visible
+							? activeBackgroundColor ?? ""
+							: "transparent",
 
-					width: width,
-					display: visible ? "flex" : "none",
-					...listStyle,
-				}}
-				ref={containerListRef}
-			>
-				{list ?? "Please add items"}
-			</div>
+						display: visible ? "flex" : "none",
+						...listStyle,
+						left: -width,
+					}}
+					ref={containerListRef}
+				>
+					{list ?? "Please add items"}
+				</div>
+			)}
 		</div>
 	);
 }

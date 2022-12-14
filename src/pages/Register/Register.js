@@ -3,15 +3,13 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/base";
+import setAuth from "../../context/AuthProvider";
 
 function Register() {
-	document.title = "Register";
-
 	const [formData, setFormData] = useState({});
-	const [step, setStep] = useState(0);
-	const navigate = useNavigate();
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		const name = e.target.name;
@@ -24,14 +22,23 @@ function Register() {
 		e.preventDefault();
 
 		try {
+			setError("");
 			const response = await axios.post(
-				"register_url",
+				"/users",
 				JSON.stringify(formData),
 				{
 					headers: { "Content-Type": "application/json" },
 					withCredentials: true,
 				}
 			);
+
+			console.log(response.data);
+
+			const accessToken = response?.data?.accessToken;
+
+			setAuth({ ...formData, accessToken });
+
+			setFormData({});
 		} catch (err) {
 			if (!err?.response) {
 				setError("No Server Response");
@@ -80,32 +87,29 @@ function Register() {
 						pattern={"\b([1-2][0-9][0-9][0-9])\b"}
 					/>
 				</div>
-			</div>
-			<div className="register-input-container">
 				<h5 className="nomargin medium">Password</h5>
 				<Input placeholder={"Password"} />
 				<h5 className="nomargin medium">Confirm Password</h5>
 				<Input placeholder={"Confirm Password"} />
-			</div>
-			<div className="register-button-container">
-				<Button
-					style={{ width: "40%" }}
-					type={"button"}
-					onClick={() => {
-						setStep(0);
-					}}
-				>
-					<h6 className="nomargin bold">Back</h6>
-				</Button>
-				<Button
-					style={{ width: "40%" }}
-					type={"button"}
-					onClick={() => {
-						navigate("/all");
-					}}
-				>
-					<h6 className="nomargin bold">SignUp</h6>
-				</Button>
+				<span className="error-message nomargin bold">{error}</span>
+				<div className="register-button-container">
+					<Button
+						type={"button"}
+						onClick={() => {
+							navigate(-1);
+						}}
+					>
+						<h6 className="nomargin bold">Cancel</h6>
+					</Button>
+					<Button
+						type={"submit"}
+						onClick={(e) => {
+							handleSubmit(e);
+						}}
+					>
+						<h6 className="nomargin bold">SignUp</h6>
+					</Button>
+				</div>
 			</div>
 		</form>
 	);

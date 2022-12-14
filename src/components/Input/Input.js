@@ -1,6 +1,7 @@
 import "./Input.css";
 
 function Input({
+	ref,
 	id,
 	placeholder,
 	style,
@@ -15,6 +16,7 @@ function Input({
 }) {
 	return (
 		<input
+			ref={ref}
 			id={id}
 			className="Input"
 			type={type ?? "text"}

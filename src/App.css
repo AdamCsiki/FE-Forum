@@ -45,10 +45,11 @@
 	align-items: center;
 }
 
-/* *:focus {
-	outline: 5px solid yellow;
-	outline-offset: 5px;
-} */
+*:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 2.5px var(--main-color);
+	border-radius: 0.25rem;
+}
 
 @media only screen and (min-width: 768px) {
 }

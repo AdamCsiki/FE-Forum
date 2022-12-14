@@ -1,29 +1,23 @@
 import "./Header.css";
 import Logo from "../Logo/Logo";
-import { Link } from "react-router-dom";
-import { PersonCircle, List } from "react-bootstrap-icons";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { PersonCircle } from "react-bootstrap-icons";
+import { useState } from "react";
 import DropDown from "../DropDown/DropDown";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ switchRef }) {
-	const [title, setTitle] = useState("Home");
-	const [user, setUser] = useState({ username: "Jane Doe" });
-
-	useEffect(() => {
-		setTitle(document.getElementsByTagName("title")[0].innerHTML);
-	}, [document.getElementsByTagName("title")[0].innerHTML]);
+	const navigate = useNavigate();
+	const [user, setUser] = useState({ username: undefined });
+	const [loggedIn, setLoggedIn] = useState(false);
 
 	return (
 		<div className="Header">
-			<Link to={{ pathname: "/" }}>
+			<Link
+				to={{ pathname: "/" }}
+				style={{ height: "75%", minWidth: "fit-content" }}
+			>
 				<Logo />
 			</Link>
-			<ToggleSwitch
-				onClick={() => {
-					switchRef.current = !switchRef.current;
-				}}
-			/>
 			<div className="header-navbar">
 				<Link
 					to={{ pathname: "home" }}
@@ -32,7 +26,7 @@ function Header({ switchRef }) {
 					Home
 				</Link>
 				<Link
-					to={{ pathname: "all" }}
+					to={{ pathname: "" }}
 					color={"var(--white)"}
 				>
 					Forum
@@ -40,6 +34,9 @@ function Header({ switchRef }) {
 
 				<DropDown
 					id={"header-profile-container"}
+					onClick={() => {
+						navigate("/login");
+					}}
 					element={
 						<div
 							style={{
@@ -51,12 +48,11 @@ function Header({ switchRef }) {
 							}}
 						>
 							<h6 className="nomargin white nowrap">
-								{user.username}
+								{loggedIn ? user.username : "Login"}
 							</h6>
 							<PersonCircle
 								className="white"
 								size={40}
-								onResize={() => null}
 							/>
 						</div>
 					}

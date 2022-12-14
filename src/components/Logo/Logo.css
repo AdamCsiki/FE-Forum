@@ -1,15 +1,15 @@
 .Logo {
 	z-index: inherit;
 
-	width: fit-content;
-	height: fit-content;
+	width: 100%;
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .logo-image {
@@ -17,6 +17,6 @@
 
 	min-width: 50px;
 	min-height: auto;
-	width: 65px;
-	height: auto;
+	width: 100%;
+	height: 100%;
 }

@@ -4,22 +4,22 @@ import "./type-scale.css";
 import "./App.css";
 import "./components/SearchBar/SearchBar.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthProvider.tsx";
+import { AuthProvider } from "./context/AuthProvider";
 import Header from "./components/Header/Header";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Forum from "./pages/Forum/Forum";
 import UserPost from "./pages/UserPost/UserPost";
-import Canvas from "./components/Canvas/Canvas";
-import { useRef } from "react";
+import Canvas from "./pages/Canvas/Canvas";
+import React, { useRef } from "react";
 
 function App() {
 	const cards = useRef(false);
 
 	return (
+		// <React.StrictMode>
 		<AuthProvider>
 			<div className="App">
-				<Canvas active={cards} />
 				<Router>
 					<Header switchRef={cards} />
 
@@ -71,6 +71,7 @@ function App() {
 				</Router>
 			</div>
 		</AuthProvider>
+		// </React.StrictMode>
 	);
 }
 

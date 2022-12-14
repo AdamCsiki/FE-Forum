@@ -3,18 +3,22 @@ import Input from "../../components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
 import gameLogo from "../../img/Ara.png";
 import Button from "../../components/Button/Button";
-import { useEffect, useState, useContext } from "react";
-import AuthContext from "../../context/AuthProvider.tsx";
-import Canvas from "../../components/Canvas/Canvas";
-import axios from "axios";
+import { useEffect, useState, useContext, lazy } from "react";
+import AuthContext from "../../context/AuthProvider.js";
+import axios from "../../api/base";
+import loginForm from "../../models/loginForm";
+import useAxios from "../../hookers/useAxios";
+
+// imports that are not needed instantly
+import CardsBg from "../../components/CardsBg/CardsBg";
 
 function LoginPage() {
 	const navigate = useNavigate();
 
 	const { setAuth } = useContext(AuthContext);
-	const [formData, setFormData] = useState({});
+	const [formData, setFormData] = useState(loginForm);
 
-	const [error, setError] = useState("");
+	const [loginResponse, error, loading, fetchData] = useAxios();
 
 	const handleChange = (e) => {
 		const name = e.target.name;
@@ -25,41 +29,24 @@ function LoginPage() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		try {
-			const response = await axios.post(
-				"login_url",
-				JSON.stringify(formData),
-				{
-					headers: { "Content-Type": "application/json" },
-					withCredentials: true,
-				}
-			);
+		await fetchData("/users/login", "GET", formData);
 
-			const accessToken = response?.data?.accessToken;
+		const accessToken = loginResponse?.data?.accessToken;
 
-			setAuth({ ...formData, accessToken });
+		setAuth({ loginResponse, accessToken });
 
-			setFormData({});
-		} catch (err) {
-			if (!err?.response) {
-				setError("No Server Response");
-			} else if (err.response?.status === 400) {
-				setError("Missing Email or Password");
-			} else if (err.response?.status === 401) {
-				setError("Unauthorized");
-			} else {
-				setError("Login Failed");
-			}
-		}
+		setFormData({});
 	};
 
 	return (
 		<form
 			className="LoginPage"
 			onSubmit={(e) => {
-				e.preventDefault();
+				console.log(formData);
+				handleSubmit(e);
 			}}
 		>
+			<CardsBg />
 			<div className="login-header">
 				<div className="logo-image-container">
 					<img
@@ -70,11 +57,6 @@ function LoginPage() {
 				</div>
 				<Button
 					id="login-register-button"
-					style={{
-						fontSize: "15px",
-						width: "fit-content",
-						margin: "15px",
-					}}
 					onClick={() => {
 						navigate("/register");
 					}}
@@ -84,7 +66,7 @@ function LoginPage() {
 			</div>
 
 			<div className="login-title-container">
-				<h2 style={{ fontWeight: 700 }}>
+				<h2>
 					<span
 						style={{
 							color: "var(--main-color)",
@@ -99,9 +81,9 @@ function LoginPage() {
 
 			<div className="login-input-container">
 				<Input
-					placeholder={"Email"}
-					name={"email"}
-					type={"email"}
+					placeholder={"Username"}
+					name={"username"}
+					type={"username"}
 					onChange={handleChange}
 				/>
 				<Input
@@ -123,13 +105,12 @@ function LoginPage() {
 				<Button
 					id="login-button"
 					type={"submit"}
-					onClick={(e) => {
-						handleSubmit(e);
-					}}
 				>
 					<span>Sign In</span>
 				</Button>
-				<h5 className="error-message center nomargin">{error}</h5>
+				<span className="error-message center nomargin bg-blur round pad">
+					{error}
+				</span>
 			</div>
 		</form>
 	);

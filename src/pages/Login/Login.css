@@ -92,6 +92,12 @@
 	height: fit-content;
 }
 
+#login-register-button {
+	font-size: 15px;
+	width: fit-content;
+	margin: 15px;
+}
+
 /* Desktop */
 @media only screen and (min-width: 768px) {
 	.LoginPage {

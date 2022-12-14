@@ -72,5 +72,26 @@
 }
 
 .error-message {
+	min-height: 1rem;
 	color: var(--error-color);
+}
+
+.bg-blur {
+	background-color: #00000080;
+}
+
+.bg-light {
+	background-color: var(--white);
+}
+
+.bg-darg {
+	background-color: var(--black);
+}
+
+.round {
+	border-radius: 1rem;
+}
+
+.pad {
+	padding: 0.5rem;
 }

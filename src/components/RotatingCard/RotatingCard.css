@@ -5,6 +5,10 @@
 	transform-style: preserve-3d;
 }
 
+.RotatingCard:hover {
+	transform: scale(1.2);
+}
+
 .the-front,
 .the-back {
 	width: fit-content;

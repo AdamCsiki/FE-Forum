@@ -1,6 +1,8 @@
 .DropDown {
 	background-color: transparent;
 
+	min-width: 30%;
+
 	border-radius: 2rem;
 
 	display: flex;
@@ -13,7 +15,7 @@
 
 .dropdown-button {
 	z-index: 6;
-	width: fit-content;
+	width: 100%;
 
 	cursor: pointer;
 
@@ -24,7 +26,7 @@
 
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: center;
 }
 
@@ -36,29 +38,34 @@
 .dropdown-list {
 	z-index: 5;
 
-	border-radius: 0 0 1rem 1rem;
-
+	min-width: 10rem;
+	width: fit-content;
 	height: fit-content;
+
+	background-color: var(--full-black-90);
+	box-shadow: var(--full-black) 0px 1px 4px, var(--black) 0px 0px 0px 3px;
+
+	border-radius: 0 0 1rem 1rem;
 
 	max-height: 20rem;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
 
 	top: 100%;
+	left: 0;
+	bottom: 0;
+	right: 20rem;
 
 	position: absolute;
 }
 
 .dropdown-list > * {
-	position: relative;
-}
-
-.dropdown-list > * {
 	width: 100%;
 	padding: 0.75rem 1rem;
+	position: relative;
 }
 
 .dropdown-list > *:hover {
@@ -68,4 +75,10 @@
 
 .dropdown-list > *:last-child:hover {
 	border-radius: 0 0 1rem 1rem;
+}
+
+@media screen and (min-width: 768px) {
+	.DropDown {
+		min-width: 10rem;
+	}
 }
