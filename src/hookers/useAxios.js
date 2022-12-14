@@ -6,11 +6,12 @@ function useAxios() {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 
-	const fetchData = (url, method, body = {}) => {
+	const fetchData = (url, method, body = {}, headers = {}) => {
 		axios({
 			method: method,
 			url: url,
 			data: body,
+			headers: headers,
 		})
 			.then((resp) => {
 				setResponse(resp.data);

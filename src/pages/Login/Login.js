@@ -66,7 +66,7 @@ function LoginPage() {
 			</div>
 
 			<div className="login-title-container">
-				<h2>
+				<h2 className="nomargin">
 					<span
 						style={{
 							color: "var(--main-color)",
