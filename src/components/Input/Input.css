@@ -1,6 +1,6 @@
 .Input {
-	background-color: var(--white);
-	color: var(--full-black);
+	background-color: var(--full-black);
+	color: var(--white);
 
 	font-weight: medium;
 	font-size: 16px;
@@ -9,17 +9,16 @@
 
 	padding: 0.6rem 1rem;
 
-	border-radius: 15px;
-
-	outline: none;
-	border: none;
+	border-radius: 0.5rem;
+	border: 1px solid var(--white);
 }
 
 .Input::placeholder {
 	font-size: 16px;
-	color: var(--black-75);
+	color: var(--white);
 }
 
 .Input:focus {
 	outline: 1px solid var(--main-color);
+	border: 1px solid var(--main-color);
 }

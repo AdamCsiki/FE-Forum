@@ -1,26 +1,20 @@
 :root {
-	--main-color: #b5e7f9;
-	--secondary-color: #576473;
-	--third-color: #d4f3ff;
-	--linear-color: linear-gradient(
-		114deg,
-		rgba(181, 231, 249, 1) 18%,
-		rgba(212, 243, 255, 1) 76%
-	);
+	--main-color: #3b4166;
 	--error-color: #c62828;
-	--full-black: #131112;
-	--full-black-90: #1d1b1c;
-	--full-black-75: #424141;
-	--full-black-50: #818081;
-	--full-black-25: #c0bfbf;
-	--full-black-10: #e6e6e6;
-	--black: #262a2c;
-	--black-90: #3c4041;
-	--black-75: #5c6061;
-	--black-50: #939596;
-	--black-25: #c8c9ca;
-	--black-10: #dfdfdf;
+	--full-black: #0f0f0d;
+	--full-black-90: #0f0f0de6;
+	--full-black-75: #0f0f0dbf;
+	--full-black-50: #0f0f0d80;
+	--full-black-25: #0f0f0d40;
+	--full-black-10: #0f0f0d1a;
+	--black: #161719;
+	--black-90: #161719e6;
+	--black-75: #5c6061bf;
+	--black-50: #93959680;
+	--black-25: #c8c9ca40;
+	--black-10: #dfdfdf1a;
 	--white: #f4f4f4;
+	--white-bright: #ffffff;
 	--half-portal-bg: url("./img/BlackStalin_short.jpg");
 }
 

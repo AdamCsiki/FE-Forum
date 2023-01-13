@@ -1,0 +1,145 @@
+.Loading {
+	background-color: var(--full-black);
+	border: 1px solid var(--white);
+	border-radius: 1rem;
+
+	width: 3rem;
+	height: 3rem;
+
+	position: relative;
+
+	overflow: hidden;
+
+	animation: loading 2s infinite;
+	transition: 2s;
+}
+
+.Loading:hover {
+	border-radius: 1rem;
+	overflow: hidden;
+}
+
+.Loading::before,
+.Loading::after {
+	content: "";
+
+	background-color: var(--white);
+	border-radius: 0.5rem;
+
+	width: 55%;
+	height: 55%;
+
+	position: absolute;
+}
+
+.Loading::before {
+	animation: topLeft 2s infinite;
+}
+
+.Loading::after {
+	animation: bottomRight 2s infinite;
+}
+
+@keyframes topLeft {
+	0% {
+		/* border-radius: 0; */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	25% {
+		/* border-radius: 0.25rem; */
+		top: 0;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+	}
+
+	50% {
+		/* border-radius: 0.5rem; */
+		top: 50%;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+	}
+
+	75% {
+		/* border-radius: 0.25rem; */
+		top: 50%;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	100% {
+		/* border-radius: 0; */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+@keyframes bottomRight {
+	0% {
+		/* border-radius: 0; */
+		top: 50%;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+	}
+	25% {
+		/* border-radius: 0.25rem; */
+		top: 50%;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	50% {
+		/* border-radius: 0.5rem; */
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	75% {
+		/* border-radius: 0.25rem; */
+		top: 0;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+	}
+
+	100% {
+		/* border-radius: 0; */
+		top: 50%;
+		left: 50%;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+@keyframes loading {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	25% {
+		transform: rotate(-90deg);
+	}
+
+	50% {
+		transform: rotate(-180deg);
+	}
+
+	75% {
+		transform: rotate(-270deg);
+	}
+
+	100% {
+		transform: rotate(-360deg);
+	}
+}

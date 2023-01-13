@@ -1,20 +1,28 @@
 .TextArea {
+	background-color: var(--full-black);
+	color: var(--white);
+
 	min-width: 100%;
-	min-height: 50%;
+	min-height: 10rem;
 
-	padding: 1rem;
+	width: 100%;
 
-	border-top-left-radius: 1rem;
-	border-top-right-radius: 1rem;
-	border-bottom-left-radius: 1rem;
+	padding: 0.5rem;
 
-	outline: none;
-	border: none;
+	border-radius: 0.5rem;
+	border: 1px solid var(--white);
+
+	resize: none;
+}
+
+.TextArea:focus {
+	outline: 1px solid var(--main-color);
+	border: 1px solid var(--main-color);
 }
 
 @media screen and (min-width: 675px) {
 	.TextArea {
 		min-width: 60%;
-		min-height: 50%;
+		min-height: 10rem;
 	}
 }

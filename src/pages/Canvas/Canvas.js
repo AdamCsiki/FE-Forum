@@ -1,20 +1,19 @@
-import axios from "../../api/base";
-import post from "../../models/post";
+import Loading from "../../components/Loading/Loading";
 
 function Canvas() {
-	const handleSubmit = () => {
-		try {
-			console.log(post);
-			const res = axios.put("/posts");
-			console.log(res);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	handleSubmit();
-
-	return <div></div>;
+	return (
+		<div
+			style={{
+				width: "100%",
+				height: "100%",
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
+			<Loading />
+		</div>
+	);
 }
 
 export default Canvas;

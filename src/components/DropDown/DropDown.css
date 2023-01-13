@@ -42,7 +42,7 @@
 	width: fit-content;
 	height: fit-content;
 
-	background-color: var(--full-black-90);
+	background-color: var(--full-black);
 	box-shadow: var(--full-black) 0px 1px 4px, var(--black) 0px 0px 0px 3px;
 
 	border-radius: 0 0 1rem 1rem;
