@@ -1,30 +1,41 @@
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../pages/Login/Login";
-import RegisterPage from "../pages/Register/RegisterPage";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 import Forum from "../pages/Forum/Forum";
-import UserPost from "../pages/UserPost/UserPost";
+import Post from "../pages/Post/Post";
 import Canvas from "../pages/Canvas/Canvas";
+import Profile from "../pages/Profile/Profile";
 
 function AppNav() {
 	return (
 		<div className="app-main">
 			<Routes>
-				<Route
-					path="/login"
-					element={<LoginPage />}
-				/>
-				<Route
-					path="/register"
-					element={<RegisterPage />}
-				/>
 				<Route path="/">
 					<Route
 						index
 						element={<Forum />}
 					/>
+					<Route path="post">
+						<Route
+							path=":postid"
+							element={<Post />}
+						/>
+					</Route>
+				</Route>
+				<Route path="/user">
 					<Route
-						path=":posttitle"
-						element={<UserPost />}
+						index
+						path="profile"
+						element={<Profile />}
+					/>
+					<Route
+						index
+						path="login"
+						element={<Login />}
+					/>
+					<Route
+						path="register"
+						element={<Register />}
 					/>
 				</Route>
 				<Route

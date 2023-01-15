@@ -1,4 +1,4 @@
-import "./RegisterPage.css";
+import "./Register.css";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import setAuth from "../../context/AuthContext";
 import useAxios from "../../hooks/useAxios";
 import RegisterModel from "../../models/RegisterModel";
 
-function RegisterPage() {
+function Register() {
 	const navigate = useNavigate();
 
 	const {
@@ -69,7 +69,6 @@ function RegisterPage() {
 	};
 
 	useEffect(() => {
-		console.log("VERIFY");
 		handleVerifyPassword(pass, verPass);
 	}, [pass, verPass]);
 
@@ -110,14 +109,6 @@ function RegisterPage() {
 				/>
 
 				<div className="register-button-container">
-					<Button
-						type={"button"}
-						onClick={() => {
-							navigate(-1);
-						}}
-					>
-						<h6 className="nomargin bold">Cancel</h6>
-					</Button>
 					<Button type={"submit"}>
 						<h6 className="nomargin bold">SignUp</h6>
 					</Button>
@@ -129,4 +120,4 @@ function RegisterPage() {
 	);
 }
 
-export default RegisterPage;
+export default Register;

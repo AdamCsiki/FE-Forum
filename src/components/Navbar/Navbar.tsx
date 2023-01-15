@@ -38,7 +38,7 @@ function Navbar({ active }: { active: boolean }) {
 				</li>
 				<li className="navbar-list-element">
 					<Link
-						to={{ pathname: "/home" }}
+						to={{ pathname: "/" }}
 						className="noline"
 					>
 						<h5 className="nomargin bold navbar-link">Home</h5>

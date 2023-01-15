@@ -1,0 +1,44 @@
+.forum-create-post-float {
+	background-color: #000000de;
+
+	width: 100%;
+	height: calc(100% - 60px);
+
+	margin-top: 60px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	position: absolute;
+}
+
+#forum-close-button {
+	width: fit-content;
+}
+
+.forum-create-post-header {
+	width: 100%;
+
+	padding: 5%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.forum-create-post-body {
+	width: 100%;
+
+	padding: 0 5%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+
+	flex-grow: 1;
+
+	gap: 5%;
+}

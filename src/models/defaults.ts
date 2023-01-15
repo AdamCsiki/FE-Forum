@@ -1,6 +1,6 @@
 import UserModel from "./UserModel";
 
-export const defaultUser: UserModel = {
+export const defaultUser: UserModel | null = {
 	id: 0,
 	role: "ROLE_USER",
 	karma: 0,

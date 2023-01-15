@@ -3,19 +3,17 @@ import Input from "../../components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
 import gameLogo from "../../img/Ara.png";
 import Button from "../../components/Button/Button";
-import { useEffect, useState, useContext, lazy } from "react";
-import AuthContext, { useAuth } from "../../context/AuthContext";
-import axios from "../../api/base";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 import LoginModel from "../../models/LoginModel";
-import useAxios from "../../hooks/useAxios";
 
 // imports that are not needed instantly
 import CardsBg from "../../components/CardsBg/CardsBg";
 
-function LoginPage() {
+function Login() {
 	const navigate = useNavigate();
 
-	const { login, error } = useAuth();
+	const { login, error, getUser } = useAuth();
 	const emptyForm: LoginModel = { email: "", password: "" };
 	const [formData, setFormData] = useState<LoginModel>(emptyForm);
 
@@ -25,18 +23,25 @@ function LoginPage() {
 		setFormData((values) => ({ ...values, [name]: value }));
 	};
 
+	useEffect(() => {
+		if (getUser() != null) {
+			navigate("/user/profile");
+		}
+	}, []);
+
 	return (
 		<form
 			className="LoginPage"
 			onSubmit={(e) => {
 				e.preventDefault();
-				console.log(formData);
 				login(formData.email, formData.password);
+				getUser();
+				navigate("/");
 			}}
 		>
 			<CardsBg />
 			<div id="login-register">
-				<a href="/register">Register</a>
+				<a href="/user/register">Register</a>
 			</div>
 			<div className="login-header">
 				<div className="logo-image-container">
@@ -56,7 +61,6 @@ function LoginPage() {
 				<Input
 					placeholder={"Email"}
 					name={"email"}
-					type={"email"}
 					onChange={(e) => handleChange(e)}
 				/>
 				<Input
@@ -93,4 +97,4 @@ function LoginPage() {
 	);
 }
 
-export default LoginPage;
+export default Login;

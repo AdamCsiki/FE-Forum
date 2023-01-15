@@ -2,13 +2,19 @@ import "./Header.css";
 import Logo from "../Logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import { PersonCircle } from "react-bootstrap-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DropDown from "../DropDown/DropDown";
-import User from "../../models/UserModel";
+import { useAuth } from "../../context/AuthContext";
+import UserModel from "../../models/UserModel";
 
-function Header({ user }: { user?: User }) {
+function Header() {
+	const { user, getUser, logout } = useAuth();
+
 	const navigate = useNavigate();
-	const [loggedIn, setLoggedIn] = useState(true);
+
+	useEffect(() => {
+		getUser();
+	}, []);
 
 	return (
 		<div className="Header">
@@ -28,9 +34,6 @@ function Header({ user }: { user?: User }) {
 
 				<DropDown
 					id={"header-profile-container"}
-					onClick={() => {
-						navigate("/login");
-					}}
 					active={true}
 					element={
 						<div
@@ -43,7 +46,7 @@ function Header({ user }: { user?: User }) {
 							}}
 						>
 							<h6 className="nomargin white nowrap">
-								{loggedIn ? user?.username : "Login"}
+								{user?.username ?? "Not Logged In"}
 							</h6>
 							<PersonCircle
 								className="white"
@@ -52,20 +55,42 @@ function Header({ user }: { user?: User }) {
 						</div>
 					}
 					list={
-						<>
-							<Link
-								className="white"
-								to={{ pathname: "/login" }}
-							>
-								Login
-							</Link>
-							<Link
-								className="white"
-								to={{ pathname: "/register" }}
-							>
-								Register
-							</Link>
-						</>
+						user ? (
+							<>
+								<Link
+									className="white"
+									to={{ pathname: "/user/profile" }}
+								>
+									Profile
+								</Link>
+								<Link
+									className="white"
+									to={{ pathname: "/user/login" }}
+									onClick={() => {
+										logout();
+									}}
+								>
+									Logout
+								</Link>
+							</>
+						) : (
+							<>
+								<Link
+									className="white"
+									to={{ pathname: "/user/login" }}
+									reloadDocument
+								>
+									Login
+								</Link>
+								<Link
+									className="white"
+									to={{ pathname: "/user/register" }}
+									reloadDocument
+								>
+									Register
+								</Link>
+							</>
+						)
 					}
 				/>
 			</div>

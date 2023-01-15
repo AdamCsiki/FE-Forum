@@ -1,13 +1,13 @@
-import "./Post.css";
+import "./ForumPost.css";
 import { Link } from "react-router-dom";
 import PostModel from "../../models/PostModel";
 
-function Post({ post, postId }: { postId: number; post: PostModel }) {
+function ForumPost({ post, postId }: { postId: number; post: PostModel }) {
 	return (
 		<div className="Post">
 			<div className="post-header">
 				<Link
-					to={{ pathname: `/post${postId}` }}
+					to={{ pathname: `/post/${postId}` }}
 					style={{ textDecoration: "none" }}
 				>
 					<h5 className="nomargin bold post-title">
@@ -15,7 +15,7 @@ function Post({ post, postId }: { postId: number; post: PostModel }) {
 					</h5>
 				</Link>
 
-				<h6 className="nomargin bold">{post.karma ?? 0}+</h6>
+				<h6 className="nomargin bold">{post.karma}+</h6>
 			</div>
 			<div className="post-content">
 				<Link
@@ -33,4 +33,4 @@ function Post({ post, postId }: { postId: number; post: PostModel }) {
 	);
 }
 
-export default Post;
+export default ForumPost;

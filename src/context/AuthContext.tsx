@@ -2,8 +2,7 @@ import { createContext, useState } from "react";
 import { defaultUser } from "../models/defaults";
 import UserModel from "../models/UserModel";
 import useAxios from "../hooks/useAxios";
-import { EmojiAngryFill } from "react-bootstrap-icons";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const AuthContext = createContext({
 	login: (email: string, password: string) => {},
@@ -12,7 +11,7 @@ export const AuthContext = createContext({
 	setUserToken: (token: string) => {},
 	user: defaultUser,
 	setUser: (user: UserModel) => {},
-	getUser: (email: string, password: string) => {},
+	getUser: () => {},
 	error: "",
 	setError: (error: string) => {},
 });
@@ -21,7 +20,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: any }) => {
 	const [userToken, setUserToken] = useState("");
-	const [user, setUser] = useState<UserModel>(defaultUser);
+	const [user, setUser] = useState<UserModel | null>(null);
 	const [error, setError] = useState<string>("");
 	const { axios } = useAxios();
 
@@ -31,14 +30,19 @@ export const AuthProvider = ({ children }: { children: any }) => {
 	// ? Maybe works, maybe not
 	const login = (email: string, password: string) => {
 		setUser(defaultUser);
+		setError("");
 		axios({
 			method: "POST",
 			url: "/login",
 			data: { email: email, password: password },
 		})
 			.then((response) => {
-				setUserToken(response.data.token);
-				localStorage.setItem("token", response.data.token);
+				setUser(response.data);
+				localStorage.setItem(
+					"token",
+					JSON.stringify(response.data.token)
+				);
+				localStorage.setItem("user", JSON.stringify(response.data));
 			})
 			.catch((error) => {
 				setError(error.message);
@@ -47,41 +51,32 @@ export const AuthProvider = ({ children }: { children: any }) => {
 
 	const logout = () => {
 		localStorage.removeItem("token");
-		setUser(defaultUser);
+		localStorage.removeItem("user");
+		setUser(null);
 		setUserToken("");
 	};
 
-	const getUser = (email: string, password: string) => {
-		if (!userToken) {
-			return;
-		}
-
-		axios({
-			method: "GET",
-			url: "/users",
-			data: { email: EmojiAngryFill, password: password },
-			headers: { Authorization: `Bearer ${userToken}` },
-		})
-			.then((response) => {
-				setUser(response.data);
-			})
-			.catch((error) => {
-				setError(error);
-			});
+	const getUser = () => {
+		setUser(JSON.parse(localStorage.getItem("user")!));
+		return JSON.parse(localStorage.getItem("user")!);
 	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
 
 	return (
 		<AuthContext.Provider
 			value={{
-				login,
-				logout,
-				userToken,
-				setUserToken,
-				user,
-				setUser,
-				getUser,
-				error,
-				setError,
+				login: login,
+				logout: logout,
+				userToken: userToken,
+				setUserToken: setUserToken,
+				user: user,
+				setUser: setUser,
+				getUser: getUser,
+				error: error,
+				setError: setError,
 			}}
 		>
 			{children}

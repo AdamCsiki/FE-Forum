@@ -1,4 +1,4 @@
-import "./UserPost.css";
+import "./Post.css";
 import Comment from "../../components/Comment/Comment";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
 import Button from "../../components/Button/Button";
@@ -7,22 +7,28 @@ import TextArea from "../../components/TextArea/TextArea";
 import useAxios from "../../hooks/useAxios";
 import UserModel from "../../models/UserModel";
 import PostModel from "../../models/PostModel";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function UserPost({
-	title,
-	author,
-	content,
-}: {
-	title?: string;
-	author?: string;
-	content?: string;
-}) {
-	const {
-		response: commentsResponse,
-		error: commentsError,
-		loading: commentsLoading,
-		fetchData: commentsFetchData,
-	} = useAxios();
+function UserPost() {
+	const params = useParams();
+	const [post, setPost] = useState<PostModel | null>(null);
+
+	const { response, error, loading, fetchData } = useAxios();
+
+	useEffect(() => {
+		fetchData(`/posts/${params.postid}`, "GET");
+	}, []);
+
+	useEffect(() => {
+		if (response) {
+			setPost(response);
+		}
+	}, [response]);
+
+	if (!post) {
+		return <div></div>;
+	}
 
 	return (
 		<div className="UserPost">
@@ -30,12 +36,14 @@ function UserPost({
 				<div className="userpost-main-content">
 					<div className="userpost-main-header">
 						<ProfileImage />
-						{author ?? "No user"}
+						{post.userId ?? "No user"}
 					</div>
 					<h4 className="userpost-title-text nomargin">
-						{title ?? "No title"}
+						{post.title ?? "No title"}
 					</h4>
-					<div className="userpost-main-text"></div>
+					<div className="userpost-main-text">
+						{post.content ?? "Content"}
+					</div>
 					<div className="userpost-reply-container">
 						<InvisButton>
 							<h6 className="nomargin pad">Reply</h6>

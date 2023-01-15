@@ -20,6 +20,13 @@ function useAxios() {
 			headers: headers,
 		})
 			.then((resp) => {
+				console.log("Request: ", {
+					url: url,
+					method: method,
+					body: body,
+					headers: headers,
+				});
+				console.log("Response: ", resp.data);
 				setResponse(resp.data);
 			})
 			.catch((err) => {

@@ -6,12 +6,14 @@ function Button({
 	onClick,
 	type,
 	style,
+	disabled,
 }: {
 	id?: string;
 	children?: any;
 	onClick?: () => void;
 	type?: any;
 	style?: React.CSSProperties;
+	disabled?: boolean;
 }) {
 	return (
 		<button
@@ -20,6 +22,7 @@ function Button({
 			type={type}
 			onClick={onClick}
 			style={style}
+			disabled={disabled ?? false}
 		>
 			{children}
 		</button>
