@@ -7,6 +7,26 @@
 	flex-direction: column;
 }
 
+.forum-scroll-button-container {
+	width: fit-content;
+	height: fit-content;
+
+	top: 90%;
+	left: 80%;
+
+	position: fixed;
+}
+
+#forum-scroll-button {
+	min-width: fit-content;
+
+	border-radius: 5rem;
+
+	padding: 0.25rem 0.75rem;
+
+	position: relative;
+}
+
 .forum-header {
 	background-color: var(--black);
 	width: 100%;
@@ -15,7 +35,7 @@
 
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: flex-start;
 
 	position: relative;
@@ -44,13 +64,20 @@
 	.Posts {
 		width: 100%;
 
-		padding: 1rem 5%;
-
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-		align-items: center;
+		align-items: flex-start;
 
 		gap: 1rem;
+	}
+
+	.forum-header {
+		justify-content: space-between;
+	}
+
+	.forum-scroll-button-container {
+		top: 90%;
+		left: 90%;
 	}
 }

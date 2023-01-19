@@ -7,49 +7,44 @@ import axios from "../../api/base";
 import setAuth from "../../context/AuthContext";
 import useAxios from "../../hooks/useAxios";
 import RegisterModel from "../../models/RegisterModel";
+import { defaultRegister } from "../../models/defaults";
+import store from "../../context/store";
 
 function Register() {
 	const navigate = useNavigate();
+	const [loading, setLoading] = useState(false);
 
-	const {
-		response: registerResponse,
-		error: error,
-		loading: loading,
-		fetchData: fetchData,
-	} = useAxios();
-	const emptyRegister: RegisterModel = {
-		id: 0,
-		role: "",
-		karma: 0,
-		description: "",
-		username: "",
-		date_of_creation: new Date(),
-		email: "",
-		password: "",
-		confirm_password: "",
-		pfp_url: "",
-		header_url: "",
-	};
-	const [formData, setFormData] = useState<RegisterModel>(emptyRegister);
+	const { axios } = useAxios();
+	const [formData, setFormData] = useState<RegisterModel>(defaultRegister);
 
 	const [valid, setValid] = useState(false);
 
 	const [pass, setPass] = useState<string>("");
 	const [verPass, setVerPass] = useState<string>("");
-	const [passError, setPassError] = useState<string>("");
+	const [error, setError] = useState<string>("");
 
 	const handleChange = (e: any) => {
 		const name = e.target.name;
 		const value = e.target.value;
-
-		setFormData((values) => ({ ...values, [name]: value }));
+		console.log(name, value);
+		setFormData({ ...formData, [name]: value });
 	};
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
+		setLoading(true);
+		console.log(formData);
 		if (valid) {
-			await fetchData("/users", "POST", formData);
-			console.log("RESPONSE: ", registerResponse);
+			axios({ url: "/register", method: "POST", data: formData })
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					setError(err.message);
+				})
+				.finally(() => {
+					setLoading(false);
+				});
 		}
 	};
 
@@ -57,13 +52,10 @@ function Register() {
 
 	const handleVerifyPassword = (pass: string, verPass: string) => {
 		if (pass.valueOf() !== verPass.valueOf() && verPass !== "") {
-			setPassError("Password doesn't match!");
+			setError("Password doesn't match!");
 			setValid(false);
 		} else {
-			setFormData((values) => {
-				return { ...values, password: pass };
-			});
-			setPassError("");
+			setError("");
 			setValid(true);
 		}
 	};
@@ -71,6 +63,13 @@ function Register() {
 	useEffect(() => {
 		handleVerifyPassword(pass, verPass);
 	}, [pass, verPass]);
+
+	useEffect(() => {
+		document.title = "Register";
+		if (store.getState().user != null) {
+			navigate("/");
+		}
+	}, []);
 
 	return (
 		<form
@@ -80,7 +79,6 @@ function Register() {
 			}}
 		>
 			<div className="register-input-container">
-				<h5 className="nomargin medium">Username</h5>
 				<Input
 					placeholder={"Username"}
 					name={"username"}
@@ -89,16 +87,23 @@ function Register() {
 						handleChange(e);
 					}}
 				/>
-				<h5 className="nomargin medium">Password</h5>
+				<Input
+					placeholder={"Email"}
+					type={"text"}
+					name={"email"}
+					onChange={(e) => {
+						handleChange(e);
+					}}
+				/>
 				<Input
 					placeholder={"Password"}
 					type={"password"}
 					name={"password"}
 					onChange={(e) => {
 						setPass(e.target.value);
+						handleChange(e);
 					}}
 				/>
-				<h5 className="nomargin medium">Confirm Password</h5>
 				<Input
 					placeholder={"Confirm Password"}
 					type={"password"}
@@ -113,8 +118,9 @@ function Register() {
 						<h6 className="nomargin bold">SignUp</h6>
 					</Button>
 				</div>
-				<span className="error-message nomargin bold">{passError}</span>
-				<span className="error-message nomargin bold">{error}</span>
+				{error && (
+					<span className="error-message nomargin bold">{error}</span>
+				)}
 			</div>
 		</form>
 	);

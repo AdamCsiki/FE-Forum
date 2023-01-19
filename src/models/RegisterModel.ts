@@ -7,7 +7,6 @@ type RegisterModel = {
 	date_of_creation: Date;
 	email: string;
 	password: string;
-	confirm_password: string;
 	pfp_url: string;
 	header_url: string;
 };

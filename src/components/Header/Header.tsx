@@ -6,15 +6,13 @@ import { useState, useEffect } from "react";
 import DropDown from "../DropDown/DropDown";
 import { useAuth } from "../../context/AuthContext";
 import UserModel from "../../models/UserModel";
+import store from "../../context/store";
 
 function Header() {
-	const { user, getUser, logout } = useAuth();
+	const { logout } = useAuth();
+	const user: UserModel | null = store.getState().user;
 
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		getUser();
-	}, []);
 
 	return (
 		<div className="Header">
@@ -48,10 +46,18 @@ function Header() {
 							<h6 className="nomargin white nowrap">
 								{user?.username ?? "Not Logged In"}
 							</h6>
-							<PersonCircle
-								className="white"
-								size={40}
-							/>
+							{user?.pfp_url ? (
+								<img
+									className="header-profile-picture"
+									src={user.pfp_url}
+									alt="Poza userului"
+								/>
+							) : (
+								<PersonCircle
+									className="white"
+									size={40}
+								/>
+							)}
 						</div>
 					}
 					list={
@@ -59,7 +65,11 @@ function Header() {
 							<>
 								<Link
 									className="white"
-									to={{ pathname: "/user/profile" }}
+									to={{
+										pathname: `/user/${
+											store.getState().user?.id
+										}`,
+									}}
 								>
 									Profile
 								</Link>

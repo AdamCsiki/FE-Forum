@@ -33,14 +33,25 @@
 	gap: 1rem;
 }
 
+.userpost-main-header-author {
+	width: fit-content;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	gap: 0.5rem;
+}
+
 .userpost-title-text {
 	padding: 15px;
 }
 
 .userpost-main-text {
 	width: 100%;
+	min-height: 28vh;
 
-	padding: 15px;
+	padding: 30px 50px;
 
 	inline-size: 100%;
 	overflow-wrap: break-word;
@@ -79,4 +90,9 @@
 
 .userpost-comment-container {
 	height: fit-content;
+}
+
+.userpost-reply-footer {
+	display: flex;
+	justify-content: flex-end;
 }

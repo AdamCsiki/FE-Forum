@@ -9,22 +9,152 @@ import UserModel from "../../models/UserModel";
 import PostModel from "../../models/PostModel";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import store from "../../context/store";
+import CommentModel from "../../models/CommentModel";
+import { defaultComment } from "../../models/defaults";
 
 function UserPost() {
 	const params = useParams();
-	const [post, setPost] = useState<PostModel | null>(null);
 
-	const { response, error, loading, fetchData } = useAxios();
+	const user = store.getState().user;
+	const [author, setAuthor] = useState<UserModel | null>(null);
+	const [post, setPost] = useState<PostModel | null>(null);
+	const [comments, setComments] = useState<any>([]);
+
+	const [formData, setFormData] = useState({ content: "" });
+
+	const { axios } = useAxios();
+	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const getPost = () => {
+		setLoading(true);
+		axios({ url: `/posts/${params.id}`, method: "GET" })
+			.then((response) => {
+				setPost(response.data);
+				document.title = response.data.title;
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	};
+
+	const getAuthor = () => {
+		setLoading(true);
+		axios({
+			url: `/users/${post?.userId}`,
+			method: "GET",
+		})
+			.then((response) => {
+				setAuthor(response.data);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	};
+
+	const getComments = () => {
+		setLoading(true);
+
+		axios({
+			url: `/comments/post/${post?.id}`,
+			method: "GET",
+		})
+			.then((response) => {
+				createComments(response.data);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
+	};
+
+	const createComments = (comments: CommentModel[]) => {
+		let i = 0;
+
+		let parentComments = comments.filter(
+			(comment) => comment.parentId == null
+		);
+
+		console.log(parentComments);
+
+		setComments(
+			parentComments.map((comment: CommentModel) => (
+				<Comment
+					key={i++}
+					comment={comment}
+					user={user}
+					postId={post?.id!}
+				/>
+			))
+		);
+	};
+
+	const onChange = (e: any) => {
+		const name = e.target.name;
+		const value = e.target.value;
+
+		console.log(name, value);
+		setFormData({ ...formData, [name]: value });
+	};
+
+	const reply = () => {
+		if (!formData.content || !user || !post) {
+			return;
+		}
+		const comment: CommentModel = {
+			id: 0,
+			content: formData?.content,
+			userId: user?.id,
+			postId: post?.id,
+			parentId: null,
+		};
+
+		axios({
+			url: "/comments",
+			method: "POST",
+			data: comment,
+		})
+			.then((response) => {
+				console.log(response);
+			})
+			.finally(() => {
+				getComments();
+			});
+	};
+
+	const modifyKarma = (value: number) => {
+		axios({
+			url: "/posts",
+			method: "PUT",
+			data: { ...post, karma: post?.karma! + value },
+		})
+			.then((response) => {
+				console.log("Response: ", response.data);
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
 	useEffect(() => {
-		fetchData(`/posts/${params.postid}`, "GET");
+		getPost();
 	}, []);
 
 	useEffect(() => {
-		if (response) {
-			setPost(response);
+		if (post) {
+			getAuthor();
+			getComments();
 		}
-	}, [response]);
+	}, [post]);
 
 	if (!post) {
 		return <div></div>;
@@ -35,8 +165,10 @@ function UserPost() {
 			<div className="userpost-main">
 				<div className="userpost-main-content">
 					<div className="userpost-main-header">
-						<ProfileImage />
-						{post.userId ?? "No user"}
+						<div className="userpost-main-header-author">
+							<ProfileImage src={author?.pfp_url} />
+							{author?.username ?? "No user"}
+						</div>
 					</div>
 					<h4 className="userpost-title-text nomargin">
 						{post.title ?? "No title"}
@@ -44,16 +176,33 @@ function UserPost() {
 					<div className="userpost-main-text">
 						{post.content ?? "Content"}
 					</div>
-					<div className="userpost-reply-container">
-						<InvisButton>
-							<h6 className="nomargin pad">Reply</h6>
-						</InvisButton>
+					{user && (
+						<div className="userpost-reply-container">
+							<InvisButton>
+								<h6 className="nomargin pad">Reply</h6>
+							</InvisButton>
 
-						<TextArea />
-						<div className="userpost-reply-footer"></div>
-					</div>
+							<TextArea
+								onChange={(e) => {
+									onChange(e);
+								}}
+								name="content"
+							/>
+							<div className="userpost-reply-footer">
+								<Button
+									onClick={() => {
+										reply();
+									}}
+								>
+									Reply
+								</Button>
+							</div>
+						</div>
+					)}
 
-					<div className="userpost-comment-container"></div>
+					<h5>Comments</h5>
+
+					<div className="userpost-comment-container">{comments}</div>
 				</div>
 			</div>
 		</div>

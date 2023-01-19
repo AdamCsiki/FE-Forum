@@ -1,4 +1,5 @@
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 const API = "http://localhost:8080";
 const TIMEOUT = 5000;

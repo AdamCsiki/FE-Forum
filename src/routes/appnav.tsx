@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Forum from "../pages/Forum/Forum";
@@ -15,21 +15,22 @@ function AppNav() {
 						index
 						element={<Forum />}
 					/>
-					<Route path="post">
-						<Route
-							path=":postid"
-							element={<Post />}
-						/>
-					</Route>
+					<Route
+						path="post/:id"
+						element={<Post />}
+					/>
 				</Route>
 				<Route path="/user">
 					<Route
 						index
-						path="profile"
+						path=""
+						element={<Navigate to={"profile"} />}
+					/>
+					<Route
+						path=":id"
 						element={<Profile />}
 					/>
 					<Route
-						index
 						path="login"
 						element={<Login />}
 					/>

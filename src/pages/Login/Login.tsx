@@ -3,19 +3,25 @@ import Input from "../../components/Input/Input";
 import { Link, useNavigate } from "react-router-dom";
 import gameLogo from "../../img/Ara.png";
 import Button from "../../components/Button/Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useAuth } from "../../context/AuthContext";
 import LoginModel from "../../models/LoginModel";
+import store from "../../context/store";
+import httpstatus from "../../httpstatus/httpstatus";
 
 // imports that are not needed instantly
 import CardsBg from "../../components/CardsBg/CardsBg";
+import axios from "../../api/base";
+import UserModel from "../../models/UserModel";
 
 function Login() {
 	const navigate = useNavigate();
 
-	const { login, error, getUser } = useAuth();
+	const { login } = useAuth();
 	const emptyForm: LoginModel = { email: "", password: "" };
 	const [formData, setFormData] = useState<LoginModel>(emptyForm);
+	const [user, setUser] = useState<UserModel | null>(null);
+	const [error, setError] = useState<string>("");
 
 	const handleChange = (e: any) => {
 		const name = e.target.name;
@@ -23,20 +29,46 @@ function Login() {
 		setFormData((values) => ({ ...values, [name]: value }));
 	};
 
-	useEffect(() => {
-		if (getUser() != null) {
-			navigate("/user/profile");
+	const submit = () => {
+		console.log(formData);
+		if (!formData.email || !formData.password) {
+			setError("User or password is missing.");
+			return;
 		}
-	}, []);
+		axios({
+			method: "POST",
+			url: "/login",
+			data: { email: formData.email, password: formData.password },
+		})
+			.then((response) => {
+				localStorage.setItem("user", JSON.stringify(response.data));
+				store.setState({ user: response.data });
+			})
+			.catch((error: any) => {
+				if (error.response.code === 500) {
+					setError("Server error.");
+					return;
+				}
+				setError("Something went wrong.");
+			})
+			.finally(() => {
+				setUser(store.getState().user);
+			});
+	};
+
+	useEffect(() => {
+		document.title = "Login";
+		if (store.getState().user != null) {
+			navigate("/");
+		}
+	}, [user]);
 
 	return (
 		<form
 			className="LoginPage"
 			onSubmit={(e) => {
 				e.preventDefault();
-				login(formData.email, formData.password);
-				getUser();
-				navigate("/");
+				submit();
 			}}
 		>
 			<CardsBg />
@@ -72,13 +104,7 @@ function Login() {
 					}}
 				/>
 
-				<Link
-					to={{ pathname: "/forgot_form" }}
-					id="login-forgot-password"
-					className="noline"
-				>
-					<span className="center">Can't sign in?</span>
-				</Link>
+				<span className="center">Can't sign in?</span>
 			</div>
 			<div className="login-button-container">
 				<Button

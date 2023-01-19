@@ -1,9 +1,9 @@
 type CommentModel = {
 	id: number;
-	parentId: number;
-	userId: number;
-	karma: number;
 	content: string;
+	parentId: number | null;
+	postId: number;
+	userId: number;
 };
 
 export default CommentModel;

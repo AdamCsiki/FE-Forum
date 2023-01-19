@@ -7,6 +7,9 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
 import { useAuth } from "../../context/AuthContext";
+import UserModel from "../../models/UserModel";
+import store from "../../context/store";
+import { defaultPost } from "../../models/defaults";
 
 function CreatePost({
 	isShown,
@@ -15,36 +18,39 @@ function CreatePost({
 	isShown: boolean;
 	setIsShown: Dispatch<SetStateAction<boolean>>;
 }) {
-	const { user, getUser } = useAuth();
+	const user = store.getState().user;
 
 	const navigate = useNavigate();
 
-	const { response, error, loading, fetchData } = useAxios();
+	const { axios } = useAxios();
+	const [post, setPost] = useState<PostModel>();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 
-	const emptyPost: PostModel = {
-		id: 0,
-		userId: 0,
-		title: "",
-		karma: 0,
-		content: "",
-	};
-	const [formData, setFormData] = useState({ emptyPost, userId: 1 });
+	const [formData, setFormData] = useState({ defaultPost, userId: 1 });
 
 	const handleChange = (e: any) => {
 		const name = e.target.name;
 		const value = e.target.value;
+		console.log(name, value);
 		setFormData({ ...formData, [name]: value });
 	};
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		fetchData("/posts", "POST", formData);
-		navigate("/forum");
+		setLoading(true);
+		axios({ url: "/posts", method: "POST", data: formData })
+			.then((response) => {
+				console.log(response.data);
+				navigate(`/post/${response.data.id}`);
+			})
+			.catch((err) => {
+				setError(err);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	};
-
-	useEffect(() => {
-		getUser();
-	});
 
 	if (!isShown || !user) {
 		return <></>;
@@ -71,9 +77,12 @@ function CreatePost({
 					style={{ width: "fit-content" }}
 					name={"title"}
 					placeholder={"Title"}
+					onChange={(e: any) => {
+						handleChange(e);
+					}}
 				/>
 				<TextArea
-					name={"title"}
+					name={"content"}
 					onChange={(e: any) => {
 						handleChange(e);
 					}}

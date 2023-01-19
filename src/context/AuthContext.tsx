@@ -1,26 +1,24 @@
-import { createContext, useState } from "react";
+import { createContext, useState, Dispatch, useReducer } from "react";
 import { defaultUser } from "../models/defaults";
 import UserModel from "../models/UserModel";
 import useAxios from "../hooks/useAxios";
 import { useContext, useEffect } from "react";
+import store from "./store";
 
 export const AuthContext = createContext({
 	login: (email: string, password: string) => {},
 	logout: () => {},
 	userToken: "",
 	setUserToken: (token: string) => {},
-	user: defaultUser,
-	setUser: (user: UserModel) => {},
-	getUser: () => {},
 	error: "",
 	setError: (error: string) => {},
+	updateUser: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }: { children: any }) => {
+export const AuthContextProvider = ({ children }: { children: any }) => {
 	const [userToken, setUserToken] = useState("");
-	const [user, setUser] = useState<UserModel | null>(null);
 	const [error, setError] = useState<string>("");
 	const { axios } = useAxios();
 
@@ -29,7 +27,6 @@ export const AuthProvider = ({ children }: { children: any }) => {
 	// ? Sets the token in the local storage of the browser
 	// ? Maybe works, maybe not
 	const login = (email: string, password: string) => {
-		setUser(defaultUser);
 		setError("");
 		axios({
 			method: "POST",
@@ -37,33 +34,36 @@ export const AuthProvider = ({ children }: { children: any }) => {
 			data: { email: email, password: password },
 		})
 			.then((response) => {
-				setUser(response.data);
-				localStorage.setItem(
-					"token",
-					JSON.stringify(response.data.token)
-				);
 				localStorage.setItem("user", JSON.stringify(response.data));
+				const user: UserModel = response.data;
+				store.setState({ user: user });
 			})
 			.catch((error) => {
+				console.log(error.message);
 				setError(error.message);
 			});
 	};
 
 	const logout = () => {
-		localStorage.removeItem("token");
 		localStorage.removeItem("user");
-		setUser(null);
-		setUserToken("");
+		store.getState().removeUser();
 	};
 
-	const getUser = () => {
-		setUser(JSON.parse(localStorage.getItem("user")!));
-		return JSON.parse(localStorage.getItem("user")!);
+	const updateUser = () => {
+		if (!store.getState().user) {
+			return;
+		}
+		axios({
+			url: `/users/${store.getState().user?.id}`,
+			method: "GET",
+		}).then((response) => {
+			store.setState({ user: response.data });
+		});
 	};
 
 	useEffect(() => {
-		getUser();
-	}, []);
+		updateUser();
+	});
 
 	return (
 		<AuthContext.Provider
@@ -72,11 +72,9 @@ export const AuthProvider = ({ children }: { children: any }) => {
 				logout: logout,
 				userToken: userToken,
 				setUserToken: setUserToken,
-				user: user,
-				setUser: setUser,
-				getUser: getUser,
 				error: error,
 				setError: setError,
+				updateUser: updateUser,
 			}}
 		>
 			{children}
@@ -84,4 +82,4 @@ export const AuthProvider = ({ children }: { children: any }) => {
 	);
 };
 
-export default AuthProvider;
+export default AuthContextProvider;

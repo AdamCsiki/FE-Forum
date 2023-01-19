@@ -15,6 +15,7 @@ function Input({
 	step,
 	pattern,
 	required,
+	value,
 }: {
 	ref?: any;
 	id?: string;
@@ -28,6 +29,7 @@ function Input({
 	step?: number;
 	pattern?: string;
 	required?: any;
+	value?: any;
 }) {
 	return (
 		<input
@@ -44,6 +46,7 @@ function Input({
 			step={step}
 			pattern={pattern}
 			required={required}
+			value={value}
 		></input>
 	);
 }

@@ -68,7 +68,6 @@ function CardsBg({ active }: { active?: boolean }) {
 
 	useEffect(() => {
 		handleCards(!isPhone, cardNumber);
-		console.log(isPhone);
 	}, [isPhone, cardNumber]);
 
 	useEffect(() => {

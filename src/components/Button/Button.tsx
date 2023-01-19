@@ -22,7 +22,7 @@ function Button({
 			type={type}
 			onClick={onClick}
 			style={style}
-			disabled={disabled ?? false}
+			disabled={disabled}
 		>
 			{children}
 		</button>

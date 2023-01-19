@@ -11,48 +11,83 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import { useAuth } from "../../context/AuthContext";
+import UserModel from "../../models/UserModel";
+import store from "../../context/store";
 
 function Forum() {
-	const { user, getUser } = useAuth();
+	document.title = "Forum";
+	const user = store.getState().user;
 
-	const {
-		response: postsResponse,
-		error: pError,
-		loading: pLoading,
-		fetchData: pFetchData,
-	} = useAxios();
+	const { axios } = useAxios();
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 
 	const [isShown, setIsShown] = useState(false);
+	const [refreshLocked, setRefreshLocked] = useState(false);
 
 	const [postList, setPostList] = useState([]);
 
 	const handlePosts = async () => {
-		await pFetchData("/posts", "GET");
+		setError("");
+		setLoading(true);
+		axios({ url: "/posts", method: "GET" })
+			.then((response) => {
+				let i = 0;
+				let tempList: any = [];
+				response?.data.forEach((obj: PostModel) => {
+					tempList.push(
+						<ForumPost
+							key={i++}
+							postId={obj.id}
+							post={obj}
+						/>
+					);
+				});
+
+				setPostList(tempList);
+			})
+			.catch((err) => {
+				console.log(err.message);
+				setError(err.message);
+			})
+			.finally(() => {
+				setLoading(false);
+				setRefreshLocked(false);
+			});
+	};
+
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
 	};
 
 	useEffect(() => {
 		handlePosts();
 	}, []);
 
-	useEffect(() => {
-		let i = 0;
-		let tempList: any = [];
-		postsResponse?.forEach((obj: PostModel) => {
-			tempList.push(
-				<ForumPost
-					key={i++}
-					postId={obj.id}
-					post={obj}
-				/>
-			);
-		});
-
-		setPostList(tempList);
-	}, [postsResponse]);
-
 	return (
 		<div className="Forum">
+			<div className="forum-scroll-button-container">
+				<Button
+					id="forum-scroll-button"
+					onClick={scrollToTop}
+				>
+					<h4 className="nomargin">^</h4>
+				</Button>
+			</div>
 			<div className="forum-header">
+				<Button
+					style={{ width: "fit-content" }}
+					onClick={() => {
+						setRefreshLocked(true);
+						handlePosts();
+					}}
+					disabled={refreshLocked}
+				>
+					Refresh
+				</Button>
 				{user && (
 					<Button
 						id="forum-create-button"
@@ -68,7 +103,7 @@ function Forum() {
 				isShown={isShown}
 				setIsShown={setIsShown}
 			/>
-			{pLoading && (
+			{loading && (
 				<div
 					style={{
 						width: "100%",
@@ -81,11 +116,11 @@ function Forum() {
 					<Loading />
 				</div>
 			)}
-			{!pLoading && (
+			{!loading && (
 				<>
-					<h5 className="error-message center blur nomargin">
-						{pError}
-					</h5>
+					{error && (
+						<h5 className="error-message center blur">{error}</h5>
+					)}
 					<div
 						className="Posts"
 						style={{ overflow: isShown ? "hidden" : "visible" }}

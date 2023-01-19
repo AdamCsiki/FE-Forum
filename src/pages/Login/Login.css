@@ -157,4 +157,8 @@
 
 		justify-content: center;
 	}
+
+	#login-register {
+		position: absolute;
+	}
 }

@@ -64,4 +64,7 @@
 }
 
 @media screen and (min-width: 765px) {
+	.Post {
+		width: 80%;
+	}
 }
